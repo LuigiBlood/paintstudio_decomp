@@ -29,8 +29,7 @@ LD_SCRIPT := $(TARGET).ld
 LD_MAP := $(BUILD_DIR)/$(TARGET).map
 ASM_DIRS := asm asm/data asm/libultra asm/libultra/os asm/libultra/io asm/libultra/gu asm/libultra/libc asm/libultra/al asm/libultra/audio asm/data/libultra asm/data/libultra/gu asm/data/libultra/os asm/boot asm/boot/malloc asm/code asm/overlays
 DATA_DIRS := bin assets
-# TODO
-#SRC_DIRS := $(shell find src -type d)
+SRC_DIRS := $(shell find src -type d)
 
 ########## Make tools ##########
 
@@ -139,7 +138,7 @@ LDFLAGS = -T tools/undefined_syms.txt -T undefined_syms_auto.txt -T undefined_fu
 
 ######################## Targets #############################
 
-$(foreach dir,$(ASM_DIRS) $(DATA_DIRS) $(COMPRESSED_DIRS) $(MAP_DIRS) $(BGM_DIRS),$(shell mkdir -p build/$(dir)))
+$(foreach dir,$(SRC_DIRS) $(ASM_DIRS) $(DATA_DIRS) $(COMPRESSED_DIRS) $(MAP_DIRS) $(BGM_DIRS),$(shell mkdir -p build/$(dir)))
 
 ######################## Build #############################
 

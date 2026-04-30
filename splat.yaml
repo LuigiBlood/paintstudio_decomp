@@ -38,7 +38,6 @@ segments:
     - [0x76FB0, pad]
   - name: seg1
     type: code
-    dir: seg1
     start: 0x787C8
     vram: 0x800BD8E0
     subsegments:
@@ -46,7 +45,6 @@ segments:
     - [0x11A228, pad]
   - name: seg2
     type: code
-    dir: seg2
     start: 0x11C2D8
     vram: 0x801F6EB0
     subsegments:
@@ -54,22 +52,20 @@ segments:
     - [0x19CF98, pad]
   - name: seg3
     type: code
-    dir: seg3
     start: 0x19E2B0
-    vram: 0x801F6EB0
+    vram: 0x801F6EB0 # TODO
     subsegments:
     - [0x19E2B0, asm]
     - [0x1F3200, pad]
   - name: seg4
     type: code
-    dir: seg4
     start: 0x1F4D40
     vram: 0x80284130
     subsegments:
     - [0x1F4D40, asm]
     - [0x279C60, pad]
     - [0x27BA20]
-  - name: ramarea
+  - name: ramarea   # Disk RAM Area Padding
     type: data
     start: 0x1A6BEF0
     vram: 0x80000000
