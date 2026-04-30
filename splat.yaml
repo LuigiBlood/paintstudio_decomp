@@ -29,6 +29,7 @@ segments:
     - [0x0200, asm, entrypoint]
     - [0x0250, data]
     - [0x0260, asm]
+    - [0x34A20, data]
 
     # DATA - Microcode
     - { start: 0x76380, type: databin, use_src_path: True, name: rsp/f3dex2 }
@@ -52,6 +53,7 @@ segments:
     vram: 0x801F6EB0
     subsegments:
     - [0x11C2D8, asm]
+    - [0x177F28, data]
     - [0x19CF98, pad]
   - name: printer
     exclusive_ram_id: overlay
@@ -74,6 +76,7 @@ segments:
     subsegments:
     - [0x1F4D40, asm]
     - [0x2346C0, data]
+    - [0x23B610, databin] # gfx
     - [0x279C60, pad]
   - name: camera
     exclusive_ram_id: overlay
@@ -84,6 +87,7 @@ segments:
     symbol_name_format: cam_$VRAM
     subsegments:
     - [0x27BA20, asm]
+    - [0x295C30, data]
     - [0x2BA0A0, pad]
     - [0x2BA388]
   - name: ramarea   # Disk RAM Area Padding
