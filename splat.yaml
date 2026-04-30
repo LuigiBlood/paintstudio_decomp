@@ -72,6 +72,7 @@ segments:
   - name: ramarea
     type: data
     start: 0x1A6BEF0
+    vram: 0x80000000
     subsegments:
     - [0x1A6BEF0, pad]
     - [0x368E5B0] # end of DD
