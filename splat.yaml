@@ -2,18 +2,22 @@ name: Mario Artist Paint Studio
 basename: dmpj
 sha1: d971675f386e7ab21414a92cf3b8db44d05f71bc
 options:
-  compiler: IDO # Not actually IDO, compiled with modern GCC by Luigiblood
+  compiler: IDO
   symbol_addrs_path: tools/symbol_addrs.txt
   target_path: dmpj.d64
   basename: dmpj
   base_path: .
   ld_script_path: dmpj.ld
-  ld_fill_value: 0xFF
+  ld_fill_value: 0xFFFFFFFF
   platform: n64 # not n64. n64dd
   hasm_in_src_path: True
   ld_legacy_generation: true
   detect_redundant_function_end: true
   gfx_ucode: f3dex # not F3DEX but whatever
+  subalign: 8
+  ld_align_segment_start: 8
+  ld_align_segment_vram_end: false
+  ld_align_section_vram_end: false
 segments:
   - name: header
     type: data # this is not a typical N64 header. Do not let splat process it as such.
@@ -25,6 +29,7 @@ segments:
     type: code
     start: 0x0200 # LBA 0
     vram: 0x80000400
+    align: 8
     subsegments:
     - [0x0200, asm, entrypoint]
     - [0x0250, data]
@@ -42,6 +47,7 @@ segments:
     dir: main
     start: 0x787C8
     vram: 0x800BD8E0
+    align: 8
     subsegments:
     - [0x787C8, asm]
     - [0xDA398, data]
@@ -51,6 +57,7 @@ segments:
     dir: capture
     start: 0x11C2D8
     vram: 0x801F6EB0
+    align: 8
     subsegments:
     - [0x11C2D8, asm]
     - [0x177F28, data]
@@ -61,10 +68,11 @@ segments:
     dir: overlays/printer
     start: 0x19E2B0
     vram: 0x80284130
+    align: 8
     symbol_name_format: print_$VRAM
     subsegments:
     - [0x19E2B0, asm]
-    - [0x1C6068, data]
+    - [0x1C6068, data] #alignment problem here
     - [0x1F3200, pad]
   - name: saveload
     exclusive_ram_id: overlay
@@ -72,6 +80,7 @@ segments:
     dir: overlays/saveload
     start: 0x1F4D40
     vram: 0x80284130
+    align: 8
     symbol_name_format: saveload_$VRAM
     subsegments:
     - [0x1F4D40, asm]
@@ -84,16 +93,128 @@ segments:
     dir: overlays/camera
     start: 0x27BA20
     vram: 0x80284130
+    align: 8
     symbol_name_format: cam_$VRAM
     subsegments:
     - [0x27BA20, asm]
     - [0x295C30, data]
     - [0x2BA0A0, pad]
-    - [0x2BA388]
+  - name: 3dworld_gfx
+    type: data
+    start: 0x2BA388
+    vram: 0x8033DB70
+    align: 8
+    subsegments:
+    - [0x2BA388, databin] # gfx
+    - [0x2E5C28, pad]
+  - name: yay0_segment
+    type: bin
+    start: 0x2EA5D8
+    vram: 0x0
+    align: 8
+    subsegments:
+    - [0x2ea5d8, bin]
+    - [0x2f3fe8, bin]
+    - [0x302700, bin]
+    - [0x310e18, bin]
+    - [0x31f530, bin]
+    - [0x328f40, bin]
+    - [0x337658, bin]
+    - [0x345d70, bin]
+    - [0x354488, bin]
+    - [0x362ba0, bin]
+    - [0x3712b8, bin]
+    - [0x37f9d0, bin]
+    - [0x38e0e8, bin]
+    - [0x39c800, bin]
+    - [0x3aaf18, bin]
+    - [0x3b9630, bin]
+    - [0x3c7d48, bin]
+    - [0x3d6460, bin]
+    - [0x3e4b78, bin]
+    - [0x3f3290, bin]
+    - [0x4019a8, bin]
+    - [0x4100c0, bin]
+    - [0x4110ab, bin]
+    - [0x412189, bin]
+    - [0x413103, bin]
+    - [0x41456a, bin]
+    - [0x4158ee, bin]
+    - [0x4165fe, bin]
+    - [0x41790c, bin]
+    - [0x419ad0, bin]
+    - [0x41b123, bin]
+    - [0x41bff3, bin]
+    - [0x41ceea, bin]
+    - [0x41dd94, bin]
+    - [0x41f2e1, bin]
+    - [0x420495, bin]
+    - [0x420fd9, bin]
+    - [0x4234e0, bin]
+    - [0x424949, bin]
+    - [0x425d15, bin]
+    - [0x4271b6, bin]
+    - [0x427de4, bin]
+    - [0x429061, bin]
+    - [0x42a213, bin]
+    - [0x42ba2f, bin]
+    - [0x42cef0, bin]
+    - [0x436900, bin]
+    - [0x445018, bin]
+    - [0x453730, bin]
+    - [0x46b858, bin]
+    - [0x483980, bin]
+    - [0x4aa1c0, bin]
+    - [0x4cbcf8, bin]
+    - [0x4e8b28, bin]
+    - [0x505958, bin]
+    - [0x520cf8, bin]
+    - [0x540300, bin]
+    - [0x55f908, bin]
+    - [0x575fa0, bin]
+    - [0x590df0, bin]
+    - [0x59e518, bin]
+    - [0x5abc40, bin]
+    - [0x5bdb20, bin]
+    - [0x5cb248, bin]
+    - [0x5d8970, bin]
+    - [0x5ea850, bin]
+    - [0x5f7f78, bin]
+    - [0x609e58, bin]
+    - [0x61bd38, bin]
+    - [0x629460, bin]
+    - [0x636b88, bin]
+    - [0x648a68, bin]
+    - [0x656190, bin]
+    - [0x6638b8, bin]
+    - [0x670fe0, bin]
+    - [0x6905e8, bin]
+    - [0x8aebe0, bin]
+    - [0x8d7158, bin]
+    - [0x8f6760, bin]
+    - [0x915d68, bin]
+    - [0x935370, bin]
+    - [0x94ba08, bin]
+    - [0x9c4a70, bin]
+    - [0x9ecfe8, bin]
+    - [0xa03680, bin]
+    - [0xa2b950, bin]
+    - [0xa4e1d0, bin]
+    - [0xa7d980, bin]
+    - [0xab5b50, bin]
+    - [0xb48770, bin]
+    - [0xb6aff0, bin]
+    - [0xb9ecb0, bin]
+    - [0xbc1530, bin]
+    - [0xbdb390, bin]
+    - [0xbf0ce0, bin]
+    - [0xc0f050, bin]
+    - [0xc1c6a0]  # test end
   - name: ramarea   # Disk RAM Area Padding
     type: data
     start: 0x1A6BEF0
-    vram: 0x80000000
+    vram: 0x0
+    align: 8
     subsegments:
     - [0x1A6BEF0, pad]
     - [0x368E5B0] # end of DD
