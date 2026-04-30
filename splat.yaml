@@ -1,0 +1,77 @@
+name: Mario Artist Paint Studio
+basename: dmpj
+sha1: d971675f386e7ab21414a92cf3b8db44d05f71bc
+options:
+  compiler: IDO # Not actually IDO, compiled with modern GCC by Luigiblood
+  symbol_addrs_path: tools/symbol_addrs.txt
+  target_path: dmpj.d64
+  basename: dmpj
+  base_path: .
+  ld_script_path: dmpj.ld
+  ld_fill_value: 0xFF
+  platform: n64 # not n64. n64dd
+  hasm_in_src_path: True
+  ld_legacy_generation: true
+  detect_redundant_function_end: true
+  gfx_ucode: f3dex # not F3DEX but whatever
+segments:
+  - name: header
+    type: data # this is not a typical N64 header. Do not let splat process it as such.
+    start: 0x00
+    vram: 0
+    subsegments:
+    - [0x0000, data, header]
+  - name: boot
+    type: code
+    start: 0x0200 # LBA 0
+    vram: 0x80000400
+    subsegments:
+    - [0x0200, asm, entrypoint]
+    - [0x0250, data]
+    - [0x0260, asm]
+
+    # DATA - Microcode
+    - { start: 0x76380, type: databin, use_src_path: True, name: rsp/f3dex2 }
+    - { start: 0x767A0, type: databin, use_src_path: True, name: rsp/s2dex2 }
+    - { start: 0x76B90, type: databin, use_src_path: True, name: rsp/f3dpex2 }
+
+    - [0x76FB0, pad]
+  - name: seg1
+    type: code
+    dir: seg1
+    start: 0x787C8
+    vram: 0x800BD8E0
+    subsegments:
+    - [0x787C8, asm]
+    - [0x11A228, pad]
+  - name: seg2
+    type: code
+    dir: seg2
+    start: 0x11C2D8
+    vram: 0x801F6EB0
+    subsegments:
+    - [0x11C2D8, asm]
+    - [0x19CF98, pad]
+  - name: seg3
+    type: code
+    dir: seg3
+    start: 0x19E2B0
+    vram: 0x801F6EB0
+    subsegments:
+    - [0x19E2B0, asm]
+    - [0x1F3200, pad]
+  - name: seg4
+    type: code
+    dir: seg4
+    start: 0x1F4D40
+    vram: 0x80284130
+    subsegments:
+    - [0x1F4D40, asm]
+    - [0x279C60, pad]
+    - [0x27BA20]
+  - name: ramarea
+    type: data
+    start: 0x1A6BEF0
+    subsegments:
+    - [0x1A6BEF0, pad]
+    - [0x368E5B0] # end of DD
