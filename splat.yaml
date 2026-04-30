@@ -36,35 +36,56 @@ segments:
     - { start: 0x76B90, type: databin, use_src_path: True, name: rsp/f3dpex2 }
 
     - [0x76FB0, pad]
-  - name: seg1
+  - name: main
     type: code
+    dir: main
     start: 0x787C8
     vram: 0x800BD8E0
     subsegments:
     - [0x787C8, asm]
+    - [0xDA398, data]
     - [0x11A228, pad]
-  - name: seg2
+  - name: capture
     type: code
+    dir: capture
     start: 0x11C2D8
     vram: 0x801F6EB0
     subsegments:
     - [0x11C2D8, asm]
     - [0x19CF98, pad]
-  - name: seg3
+  - name: printer
+    exclusive_ram_id: overlay
     type: code
+    dir: overlays/printer
     start: 0x19E2B0
-    vram: 0x801F6EB0 # TODO
+    vram: 0x80284130
+    symbol_name_format: print_$VRAM
     subsegments:
     - [0x19E2B0, asm]
+    - [0x1C6068, data]
     - [0x1F3200, pad]
-  - name: seg4
+  - name: saveload
+    exclusive_ram_id: overlay
     type: code
+    dir: overlays/saveload
     start: 0x1F4D40
     vram: 0x80284130
+    symbol_name_format: saveload_$VRAM
     subsegments:
     - [0x1F4D40, asm]
+    - [0x2346C0, data]
     - [0x279C60, pad]
-    - [0x27BA20]
+  - name: camera
+    exclusive_ram_id: overlay
+    type: code
+    dir: overlays/camera
+    start: 0x27BA20
+    vram: 0x80284130
+    symbol_name_format: cam_$VRAM
+    subsegments:
+    - [0x27BA20, asm]
+    - [0x2BA0A0, pad]
+    - [0x2BA388]
   - name: ramarea   # Disk RAM Area Padding
     type: data
     start: 0x1A6BEF0

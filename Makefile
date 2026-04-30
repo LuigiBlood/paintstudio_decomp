@@ -27,7 +27,7 @@ ROM := $(TARGET).d64
 ELF := $(BUILD_DIR)/$(TARGET).elf
 LD_SCRIPT := $(TARGET).ld
 LD_MAP := $(BUILD_DIR)/$(TARGET).map
-ASM_DIRS := asm asm/data asm/libultra asm/libultra/os asm/libultra/io asm/libultra/gu asm/libultra/libc asm/libultra/al asm/libultra/audio asm/data/libultra asm/data/libultra/gu asm/data/libultra/os asm/boot asm/boot/malloc asm/code asm/overlays
+ASM_DIRS := asm asm/data asm/main asm/capture asm/overlays/printer asm/overlays/saveload asm/overlays/camera asm/data/main asm/data/overlays/printer asm/data/overlays/saveload
 DATA_DIRS := bin assets
 SRC_DIRS := $(shell find src -type d)
 
