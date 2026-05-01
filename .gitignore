@@ -3,8 +3,9 @@ build/
 expected/
 asm/
 assets/
-tools/ido-recomp
+tools/ido_recomp
 *.d64
 *_auto.txt
 *.s
 .DS_Store
+*.ld
