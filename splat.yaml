@@ -1,6 +1,6 @@
 name: Mario Artist Paint Studio
 basename: dmpj
-sha1: d971675f386e7ab21414a92cf3b8db44d05f71bc
+sha1: c3cd83e8aa479ba8b5e039ff99abfa630b5d1fa7
 options:
   compiler: IDO
   symbol_addrs_path: tools/symbol_addrs.txt
