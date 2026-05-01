@@ -107,7 +107,7 @@ segments:
     subsegments:
     - [0x2BA388, databin] # gfx
     - [0x2E5C28, pad]
-  - name: yay0_segment
+  - name: yay0_segment1
     type: bin
     start: 0x2EA5D8
     vram: 0x0
@@ -134,7 +134,8 @@ segments:
     - [0x3e4b78, bin]
     - [0x3f3290, bin]
     - [0x4019a8, bin]
-    - [0x4100c0, bin]
+
+    - [0x4100c0, bin] # single segment
     - [0x4110ab, bin]
     - [0x412189, bin]
     - [0x413103, bin]
@@ -142,7 +143,8 @@ segments:
     - [0x4158ee, bin]
     - [0x4165fe, bin]
     - [0x41790c, bin]
-    - [0x419ad0, bin]
+
+    - [0x419ad0, bin] # single segment
     - [0x41b123, bin]
     - [0x41bff3, bin]
     - [0x41ceea, bin]
@@ -150,7 +152,8 @@ segments:
     - [0x41f2e1, bin]
     - [0x420495, bin]
     - [0x420fd9, bin]
-    - [0x4234e0, bin]
+
+    - [0x4234e0, bin] # single segment
     - [0x424949, bin]
     - [0x425d15, bin]
     - [0x4271b6, bin]
@@ -158,6 +161,7 @@ segments:
     - [0x429061, bin]
     - [0x42a213, bin]
     - [0x42ba2f, bin]
+
     - [0x42cef0, bin]
     - [0x436900, bin]
     - [0x445018, bin]
@@ -189,32 +193,271 @@ segments:
     - [0x6638b8, bin]
     - [0x670fe0, bin]
     - [0x6905e8, bin]
-    - [0x8aebe0, bin]
-    - [0x8d7158, bin]
-    - [0x8f6760, bin]
-    - [0x915d68, bin]
-    - [0x935370, bin]
-    - [0x94ba08, bin]
-    - [0x9c4a70, bin]
-    - [0x9ecfe8, bin]
-    - [0xa03680, bin]
-    - [0xa2b950, bin]
-    - [0xa4e1d0, bin]
-    - [0xa7d980, bin]
-    - [0xab5b50, bin]
-    - [0xb48770, bin]
-    - [0xb6aff0, bin]
-    - [0xb9ecb0, bin]
-    - [0xbc1530, bin]
-    - [0xbdb390, bin]
-    - [0xbf0ce0, bin]
-    - [0xc0f050, bin]
-    - [0xc1c6a0]  # test end
-  - name: ramarea   # Disk RAM Area Padding
-    type: data
-    start: 0x1A6BEF0
+  - name: gfx_segment1
+    type: bin
+    start: 0x6B43A8
+    vram: 0x0 #TODO
+    align: 8
+    subsegments:
+    - [0x6B43A8, bin]
+    - [0x772548, pad]
+  - name: unk_segment2
+    type: bin
+    start: 0x774F90
+    vram: 0x0 #TODO
+    align: 8
+    subsegments:
+    - [0x774F90, bin]
+    - [0x78B830, pad]
+  - name: unk_segment3
+    type: bin
+    start: 0x78FDE0
+    vram: 0x0 #TODO
+    align: 8
+    subsegments:
+    - [0x78FDE0, bin]
+    - [0x7A1E00, pad]
+  - name: unk_segment4
+    type: bin
+    start: 0x7A6478
+    vram: 0x0 #TODO
+    align: 8
+    subsegments:
+    - [0x7A6478, bin]
+    - [0x7B5098, pad]
+  - name: gfx_segment5
+    type: bin
+    start: 0x7B8358
+    vram: 0x0 #TODO
+    align: 8
+    subsegments:
+    - [0x7B8358, bin]
+    - [0x7D41F8, pad]
+  - name: gfx_segment6
+    type: bin
+    start: 0x7D7960
+    vram: 0x0 #TODO
+    align: 8
+    subsegments:
+    - [0x7D7960, bin]
+    - [0x7F1720, pad]
+  - name: gfx_segment7
+    type: bin
+    start: 0x7F27B0
+    vram: 0x0 #TODO
+    align: 8
+    subsegments:
+    - [0x7F27B0, bin]
+    - [0x80E6A0, pad]
+  - name: gfx_segment8
+    type: bin
+    start: 0x811DB8
+    vram: 0x0 #TODO
+    align: 8
+    subsegments:    #these are several segments but this is just to waste a lot less time for now
+    - [0x811DB8, bin, "cclownf"]
+    - [0x816570, bin, "cpbfish"]
+    - [0x81AD28, bin, "emangelf"]
+    - [0x81F4E0, bin, "humbug"]
+    - [0x823C98, bin, "reangelf"]
+    - [0x828450, bin, "redoscar"]
+    - [0x82CC08, bin, "regaltan"]
+    - [0x8313C0, bin, "yscatf"]
+    - [0x835B78, bin, "g576"]
+    - [0x83A330, bin, "g577"]
+    - [0x83EAE8, bin, "s40"]
+    - [0x847A58, bin, "s1"]
+  - name: yay0_segment2
+    type: bin
+    start: 0x8AEBE0
     vram: 0x0
     align: 8
     subsegments:
-    - [0x1A6BEF0, pad]
-    - [0x368E5B0] # end of DD
+    - [0x8aebe0, bin]
+  - name: gfx_segment9
+    type: bin
+    start: 0x8B7B50
+    vram: 0x0 #TODO
+    align: 8
+    subsegments:
+    - [0x8B7B50, bin]
+  - name: yay0_segment3
+    type: bin
+    start: 0x8D7158
+    vram: 0x0
+    align: 8
+    subsegments:
+    - [0x8D7158, bin]
+  - name: gfx_segment10
+    type: bin
+    start: 0x8DB910
+    vram: 0x0 #TODO
+    align: 8
+    subsegments:
+    - [0x8DB910, bin]
+  - name: yay0_segment4
+    type: bin
+    start: 0x8f6760
+    vram: 0x0
+    align: 8
+    subsegments:
+    - [0x8f6760, bin]
+  - name: gfx_segment11
+    type: bin
+    start: 0x8FAF18
+    vram: 0x0 #TODO
+    align: 8
+    subsegments:
+    - [0x8FAF18, bin] # model
+  - name: whatever_segment
+    type: bin
+    start: 0x915d68
+    vram: 0x0
+    align: 8
+    subsegments: # these are all seperate segments
+    - [0x915d68, bin] # yay0
+    - [0x91ECD8, bin] # model
+    - [0x935370, bin] # yay0
+    - [0x939B28, bin] # model
+    - [0x94ba08, bin] # yay0
+    - [0x9501C0, bin] # model
+    - [0x966858, bin] # model
+    - [0x96B010, bin] # model
+    - [0x96F7C8, bin] # model
+    - [0x973F80, bin] # model, jurassic world environment
+    - [0x9c4a70, bin] # yay0
+    - [0x9D2198, bin] # model, t-rex
+    - [0x9ecfe8, bin] # yay0
+    - [0x9F17A0, bin] # model
+    - [0xa03680, bin] # yay0
+    - [0xA15560, bin] # model
+    - [0xa2b950, bin] # yay0
+    - [0xA38880, bin] # model
+    - [0xa4e1d0, bin] # yay0
+    - [0xA68030, bin] # model
+    - [0xa7d980, bin] # yay0
+    - [0xAA0200, bin] # model
+    - [0xab5b50, bin] # yay0
+    - [0xACB4A0, bin] # model
+    - [0xADC8E0, bin] # model, planet mars environment
+    - [0xB3FD50, bin] # ?
+    - [0xB44260, bin] # model
+    - [0xb48770, bin] # yay0
+    - [0xB51190, bin] # model
+    - [0xb6aff0, bin] # yay0
+    - [0xB89360, bin] # model
+    - [0xb9ecb0, bin] # yay0
+    - [0xBA76D0, bin] # model
+    - [0xbc1530, bin] # yay0
+    - [0xBC5A40, bin] # model
+    - [0xbdb390, bin] # yay0
+    - [0xBE3DB0, bin] # model
+    - [0xbf0ce0, bin] # yay0
+    - [0xBF51F0, bin] # model
+    - [0xc0f050, bin] # yay0
+    - [0xC20490, bin] # model
+    - [0xC3A2F0, bin] # ?
+    - [0xC3E800, bin] # model
+    - [0xC42D10, bin] # model
+    - [0xC65590, bin] # ?
+    - [0xC769D0, bin] # model
+    - [0xCA6180, bin] # gfx, title screen
+    - [0xCD5930, bin] # gfx, menu
+    - [0xD0DB00, bin] # gfx, capture
+    - [0xD23450, bin] # gfx, alphabet lowercase
+    - [0xD2BE70, bin] # gfx, alphabet uppercase
+    - [0xD34890, bin] # gfx, numbers
+    - [0xD3D2B0, bin] # gfx, hiragana
+    - [0xD4E6F0, bin] # gfx, katakana
+    - [0xD5FB30, bin] # gfx, kanji
+    - [0xD75480, bin] # gfx, 2dpaint palette editor
+    - [0xDA4C30, bin] # gfx, 2dpaint frames and more
+    - [0xE37850, bin] # gfx, capture
+    - [0xE44780, bin] # gfx, game boy camera
+    - [0xE4D1A0, bin] # gfx, 2dpaint, music
+    - [0xE96FB0, bin] # gfx, 3dworld
+  - name: sound_segment
+    type: bin
+    start: 0xEBD540
+    vram: 0x0
+    align: 8
+    subsegments: # these are all seperate segments
+    - [0xEBD540, bin] # ptr
+    - [0xEC1A50, bin] # wbk
+    - [0xF5D5E0, bin] # ptr
+    - [0xF615A0, bin] # wbk
+    - [0x1008B20, bin] # ptr
+    - [0x100CAE0, bin] # wbk
+    - [0x10EFCA0, bin] # ptr
+    - [0x10F3C60, bin] # wbk
+    - [0x11EECA0, bin] # ptr
+    - [0x11F2C60, bin] # wbk
+    - [0x11FEBA0, bin] # ptr, AQUAPNT.PTR
+    - [0x1202B60, bin] # wbk, AQUAPNT.WBK
+    - [0x1262560, bin] # ptr, DUMBERPT.PTR
+    - [0x1266520, bin] # wbk, DUMBERPT.WBK
+    - [0x1296220, bin] # ptr, DUMBPNT.PTR
+    - [0x129A1E0, bin] # wbk, DUMBPNT.WBK
+    - [0x12B9FE0, bin] # ptr, MARIOPNT.PTR
+    - [0x12BDFA0, bin] # wbk, MARIOPNT.WBK
+    - [0x12D5E20, bin] # ptr, STUPIDO.PTR
+    - [0x12D9DE0, bin] # wbk, STUPIDO.WBK
+    - [0x132D8A0, bin] # ptr
+    - [0x1331860, bin] # wbk
+    - [0x136D4A0, bin] # ptr, dinobgt1.ptr
+    - [0x1371460, bin] # wbk, dinobgt1.wbk
+    - [0x142C8A0, bin] # ptr, Dinobgt2.ptr
+    - [0x1430860, bin] # wbk, Dinobgt2.wbk
+    - [0x14E7CE0, bin] # ptr, SEA.PTR
+    - [0x14EFC60, bin] # wbk, SEA.WBK
+    - [0x1612A20, bin] # ptr, deep6.ptr
+    - [0x16169E0, bin] # wbk, deep6.wbk
+    - [0x1789D40, bin] # ptr, SWING2.PTR
+    - [0x178E250, bin] # wbk, SWING2.WBK
+    - [0x18322B0, bin] # ptr, BOSSOVA.PTR
+    - [0x18367C0, bin] # wbk, BOSSOVA.WBK
+    - [0x18C93E0, bin] # ptr, skanka.ptr
+    - [0x18CD8F0, bin] # wbk, skanka.wbk
+    - [0x195C000, bin] # ptr, create_title.ptr
+    - [0x1960510, bin] # wbk, create_title.wbk
+    - [0x1968F30, bin] # ptr, gallery.ptr
+    - [0x196D440, bin] # wbk, gallery.wbk
+    - [0x1971950, bin] # ptr, paint_save.ptr
+    - [0x1975E60, bin] # wbk, paint_save.wbk
+    - [0x19872A0, bin] # ptr
+    - [0x198B7B0, bin] # wbk
+    - [0x19B6A50, bin] # ptr
+    - [0x19BAF60, bin] # wbk
+    - [0x19CC3A0, bin] # ptr
+    - [0x19D08B0, bin] # wbk
+    - [0x19E6200, bin] # ptr
+    - [0x19EA710, bin] # wbk
+    - [0x19F7640, bin] # bin
+    - [0x1A04570, bin] # bin
+    - [0x1A08A80, bin] # bin
+    - [0x1A0CF90, bin] # bin
+    - [0x1A114A0, bin] # bin
+    - [0x1A19EC0, bin] # bin
+    - [0x1A1E3D0, bin] # bin
+    - [0x1A26DF0, bin] # bin
+    - [0x1A33D20, bin] # bin
+    - [0x1A40C50, bin] # bin
+    - [0x1A49670, bin] # bin
+    - [0x1A4DB80, bin] # bin
+    - [0x1A565A0, bin] # bin
+    - [0x1A5EFC0, bin] # bin
+    - [0x1A634B0, bin] # bin
+    - [0x1A679E0, bin] # bin
+  - name: ramarea   # Disk RAM Area Padding
+    type: bin
+    start: 0x1A6BEF0
+    vram: 0x0
+    align: 8
+#  - name: cheat
+#    type: data
+#    start: 0x368E5A0
+#    vram: 0x0
+#    align: 8
+#    subsegments:
+#    - [0x368E5A0, bin]
+  - [0x368E5B0] # end of DD
