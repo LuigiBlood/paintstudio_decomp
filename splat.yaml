@@ -34,6 +34,8 @@ segments:
     - [0x0200, asm, entrypoint]
     - [0x0250, data]
     - [0x0260, asm]
+    - [0x1160, c, gameboot]
+    - [0x76B0, asm]
     - [0x34A20, data]
 
     # DATA - Microcode
