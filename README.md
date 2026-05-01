@@ -1,5 +1,9 @@
 # Mario Artist Paint Studio Decompilation
 
+[![build](https://img.shields.io/github/actions/workflow/status/LuigiBlood/paintstudio_decomp/ubuntu-build.yml?branch=main&label=build)](https://github.com/LuigiBlood/paintstudio_decomp/actions/workflows/ubuntu-build.yml)
+[![Code](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/LuigiBlood/paintstudio_decomp/gh-pages/badges/code.json&cacheSeconds=300)](https://raw.githubusercontent.com/LuigiBlood/paintstudio_decomp/gh-pages/badges/progress.json)
+[![Data](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/LuigiBlood/paintstudio_decomp/gh-pages/badges/data.json&cacheSeconds=300)](https://raw.githubusercontent.com/LuigiBlood/paintstudio_decomp/gh-pages/badges/progress.json)
+
 Required base ROM file:
 
 - `dmpj.d64` with MD5 `3546bc6d93928a28285a91478bc41b68`
