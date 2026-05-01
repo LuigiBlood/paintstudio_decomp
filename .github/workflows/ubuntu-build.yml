@@ -47,6 +47,9 @@ jobs:
             make \
             openssl
 
+      - name: Install Python dependencies
+        run: python3 -m pip install --break-system-packages -r tools/splat/requirements.txt
+
       - name: Decrypt baserom
         run: |
           test -n "$ROM_PASSWORD"
