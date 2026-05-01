@@ -172,6 +172,11 @@ setup: distclean submodules split
 $(BUILD_DIR)/%.inc: %.png
 	$(PIGMENT64) to-bin --c-array --format $(subst .,,$(suffix $*)) -o $@ $<
 
+# TODO: Determine what causes this
+O_FILES_PRINTER := $(BUILD_DIR)/asm/overlays/printer/%.s.o $(BUILD_DIR)/asm/data/overlays/printer/%.s.o
+
+$(O_FILES_PRINTER): ASFLAGS += -no-pad-sections
+
 # ------------------------------------------------------------------------------
 
 $(BUILD_DIR):
