@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - main
+  pull_request:
+    branches:
+      - main
   workflow_dispatch:
 
 permissions:
@@ -11,6 +14,7 @@ permissions:
 
 jobs:
   build:
+    if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.fork == false
     runs-on: ubuntu-latest
     env:
       ROM_PASSWORD: ${{ secrets.PAINTSTUDIO_ROM_PASSWORD }}
@@ -66,3 +70,14 @@ jobs:
 
       - name: Verify built ROM hash
         run: md5sum -c checksum.md5
+
+  fork-pr-note:
+    if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.fork == true
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Explain skipped private build
+        run: |
+          echo "Skipping private ROM build for forked pull requests."
+          echo "This workflow requires PAINTSTUDIO_PRIVATE_REPO_TOKEN and PAINTSTUDIO_ROM_PASSWORD,"
+          echo "and GitHub Actions does not expose those secrets to workflows from forks."
