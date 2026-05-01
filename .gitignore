@@ -1,0 +1,10 @@
+ctx.c
+build/
+expected/
+asm/
+assets/
+tools/ido-recomp
+*.d64
+*_auto.txt
+*.s
+.DS_Store
