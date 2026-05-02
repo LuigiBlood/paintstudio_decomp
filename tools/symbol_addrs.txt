@@ -91,7 +91,7 @@ LeoCJCreateLeoManager = 0x80014D10;
 LeoCACreateLeoManager = 0x80014F50;
 LeoTestUnitReady = 0x80015180;
 leoTest_unit_rdy = 0x80015220;
-LeoReadRTC = 0x80015260;		//difference
+LeoReadRTC = 0x80015260;
 leoSeek = 0x800152C0;
 LeoSeek = 0x80015380;
 
@@ -106,7 +106,13 @@ __leoActive = 0x80059320;
 
 //libleo 2.0J .rodata
 LEO_MESG_ZERO = 0x8005BFC0;
+leo_sys_form_lbas = 0x8005BFD0;
+//leocmdex_rodata_0008 = 0x8005BFD8;	//jmp table
+//leocmdex_rodata_0040 = 0x8005C010;	//jmp table
+//leocmdex_rodata_0078 = 0x8005C048;	//jmp table
 leo_disk_id_lba = 0x8005C080;
+//leomecha_rodata_0000 = 0x8005C090;	//jmp table
+//leomecha_rodata_0034 = 0x8005C0C4;	//jmp table
 LEOfirmware_rev = 0x8005C100;
 LEOBYTE_TBL1 = 0x8005C108;
 LEOBYTE_TBL2 = 0x8005C114;
@@ -122,6 +128,7 @@ rd_mseq_code = 0x8005C700;
 wt_mseq_code = 0x8005C740;
 ymdupper = 0x8005C780;
 dayupper = 0x8005C788;
+
 
 //libleo 2.0J .bss
 LEOcommand_que = 0x800B9328;
@@ -165,6 +172,7 @@ __leoVersion = 0x800B9D80;
 leoDiskStack = 0x800B9D90;
 mseq_tbl = 0x800BAD90;
 LEOcommandThreadStack = 0x800B8B28;
+LEOinterruptThreadStack = 0x800B8F28;
 
 
 //libultra 2.0J .text
@@ -514,15 +522,6 @@ xlitob_data_0014 = 0x8005B324;
 __osViDevMgr = 0x8005B340;
 __additional_scanline = 0x8005B35C;
 aisetnextbuf_data_0000 = 0x8005B360;
-
-leocmdex_rodata_0000 = 0x8005BFD0;
-leocmdex_rodata_0008 = 0x8005BFD8;
-leocmdex_rodata_0040 = 0x8005C010;
-leocmdex_rodata_0078 = 0x8005C048;
-
-leord_diskid_rodata_0002 = 0x8005C082;
-leomecha_rodata_0000 = 0x8005C090;
-leomecha_rodata_0034 = 0x8005C0C4;
 
 rotate_rodata_0000 = 0x8005C7A0;
 align_rodata_0000 = 0x8005C850;
