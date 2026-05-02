@@ -217,8 +217,8 @@ void func_80001A44(void) {
 
 #pragma GLOBAL_ASM("asm/nonmatchings/gameboot/func_80003A98.s")
 
-void __dummy(void) {
-}
+//void __dummy(void) {
+//}
 
 #pragma GLOBAL_ASM("asm/nonmatchings/gameboot/func_80003AC0.s")
 
@@ -262,6 +262,6 @@ void __dummy(void) {
 
 #pragma GLOBAL_ASM("asm/nonmatchings/gameboot/func_800057B0.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/gameboot/osProfileFlush.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/gameboot/func_8000584C.s")
 
 #pragma GLOBAL_ASM("asm/nonmatchings/gameboot/func_80005878.s")

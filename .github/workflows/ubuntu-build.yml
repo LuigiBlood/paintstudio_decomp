@@ -23,6 +23,7 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v4
         with:
+          persist-credentials: false
           submodules: recursive
 
       - name: Check out private ROM repository
@@ -31,6 +32,7 @@ jobs:
           repository: zestydevy/paintstudio-private
           token: ${{ secrets.PAINTSTUDIO_PRIVATE_REPO_TOKEN }}
           path: paintstudio-private
+          persist-credentials: false
           sparse-checkout: |
             dmpj.d64.aes
           sparse-checkout-cone-mode: false
@@ -70,6 +72,70 @@ jobs:
 
       - name: Verify built ROM hash
         run: md5sum -c checksum.md5
+
+      - name: Generate progress data
+        run: |
+          mkdir -p build/badges
+          python3 tools/progress.py -q --json build/progress.json
+          python3 tools/generate_progress_badges.py build/progress.json build/badges
+
+      - name: Upload progress badge data
+        uses: actions/upload-artifact@v4
+        with:
+          name: progress-badge-data
+          if-no-files-found: error
+          path: |
+            build/progress.json
+            build/badges
+
+  publish-progress-badges:
+    if: needs.build.result == 'success' && github.ref == 'refs/heads/main' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch')
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Download progress badge data
+        uses: actions/download-artifact@v4
+        with:
+          name: progress-badge-data
+          path: artifact
+
+      - name: Publish progress badge data
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+
+          publish_dir="$(mktemp -d)"
+          remote_url="https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+
+          if git clone --depth=1 --branch gh-pages "${remote_url}" "${publish_dir}"; then
+            :
+          else
+            git init "${publish_dir}"
+            git -C "${publish_dir}" checkout -b gh-pages
+            git -C "${publish_dir}" remote add origin "${remote_url}"
+          fi
+
+          mkdir -p "${publish_dir}/badges"
+          cp artifact/progress.json "${publish_dir}/badges/progress.json"
+          cp artifact/badges/code.json "${publish_dir}/badges/code.json"
+          cp artifact/badges/data.json "${publish_dir}/badges/data.json"
+          touch "${publish_dir}/.nojekyll"
+
+          git -C "${publish_dir}" config user.name "github-actions[bot]"
+          git -C "${publish_dir}" config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git -C "${publish_dir}" add badges .nojekyll
+
+          if git -C "${publish_dir}" diff --cached --quiet; then
+            echo "No badge changes to publish."
+            exit 0
+          fi
+
+          git -C "${publish_dir}" commit -m "Update progress badges for ${GITHUB_SHA}"
+          git -C "${publish_dir}" push origin gh-pages
 
   fork-pr-note:
     if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.fork == true
