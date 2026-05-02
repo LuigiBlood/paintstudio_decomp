@@ -128,7 +128,7 @@ OBJDUMP_FLAGS := -d -r -z -Mreg-names=32
 INC_DIRS := include include/libultra include/PR include/audio include/ido . src/boot/malloc
 IINCS := $(foreach d,$(INC_DIRS),-I$d)
 # defines for SGI IDO
-CDEFS := -D_LANGUAGE_C -DF3DEX_GBI -DNDEBUG -D_FINALROM -DBUILD_VERSION=VERSION_H -DSTDC_HEADERS
+CDEFS := -D_LANGUAGE_C -DF3DEX_GBI -DNDEBUG -D_FINALROM -DBUILD_VERSION=VERSION_J -DSTDC_HEADERS
 
 ifeq ($(ENABLE_ISPRINT),1)
   CDEFS += -DENABLE_ISPRINT
