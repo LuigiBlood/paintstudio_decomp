@@ -28,7 +28,7 @@ ROM := $(TARGET).d64
 ELF := $(BUILD_DIR)/$(TARGET).elf
 LD_SCRIPT := $(TARGET).ld
 LD_MAP := $(BUILD_DIR)/$(TARGET).map
-ASM_DIRS := asm asm/data asm/main asm/capture asm/overlays/printer asm/overlays/saveload asm/overlays/camera asm/data/main asm/data/capture asm/data/overlays/printer asm/data/overlays/saveload asm/data/overlays/camera
+ASM_DIRS := asm asm/data asm/main asm/capture asm/overlays/printer asm/overlays/saveload asm/overlays/camera asm/data/main asm/data/capture asm/data/overlays/printer asm/data/overlays/saveload asm/data/overlays/camera asm/data/leo/lib
 DATA_DIRS := bin assets
 SRC_DIRS := $(shell test ! -d src || find src -type d)
 
@@ -128,10 +128,17 @@ OBJDUMP_FLAGS := -d -r -z -Mreg-names=32
 INC_DIRS := include include/libultra include/PR include/audio include/ido . src/boot/malloc
 IINCS := $(foreach d,$(INC_DIRS),-I$d)
 # defines for SGI IDO
-CDEFS := -D_LANGUAGE_C -DF3DEX_GBI -DNDEBUG -D_FINALROM -DBUILD_VERSION=VERSION_H -DSTDC_HEADERS
+CDEFS := -D_LANGUAGE_C -DF3DEX_GBI -DNDEBUG -D_FINALROM -DBUILD_VERSION=VERSION_J -DSTDC_HEADERS
 
 ifeq ($(ENABLE_ISPRINT),1)
   CDEFS += -DENABLE_ISPRINT
+endif
+
+LEO_VERSION ?= 1
+ifeq ($(LEO_VERSION),0)
+    CDEFS += -DLEO_VERSION=LEO_VERSION_A
+else
+    CDEFS += -DLEO_VERSION=LEO_VERSION_B
 endif
 
 ifneq ($(RUN_CC_CHECK),0)

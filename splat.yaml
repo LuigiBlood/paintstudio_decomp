@@ -36,7 +36,68 @@ segments:
     - [0x0260, asm]
     - [0x1160, c, gameboot]
     - [0x76B0, asm]
+
+    - [0xC500, c, leo/lib/readwrite]
+    - [0xC790, c, leo/lib/leofunc]
+    - [0xCA00, c, leo/lib/leoint]
+    - [0xD3F0, pad]
+    - [0xD400, c, leo/lib/leocmdex]
+    - [0xDA90, c, leo/lib/leoread]
+    - [0xDC50, c, leo/lib/lbatobyte]
+    - [0xDDA0, c, leo/lib/driverominit]
+    - [0xDF00, c, leo/lib/leoinquiry]
+    - [0xDFB0, c, leo/lib/leodiskinit]
+    - [0xE050, c, leo/lib/readdiskid]
+    - [0xE0B0, c, leo/lib/leord_diskid]
+    - [0xE240, c, leo/lib/leomecha]
+    - [0xEB90, c, leo/lib/spdlmotor]
+    - [0xEC50, c, leo/lib/leoc2ecc]
+    - [0xFD40, c, leo/lib/createleomanager]
+    - [0xFEB0, c, leo/lib/leointerrupt]
+    - [0x10580, c, leo/lib/setrtc]
+    - [0x106F0, c, leo/lib/leomseq_tbl]
+    - [0x108A0, c, leo/lib/leomotor]
+    - [0x10990, c, leo/lib/driveexist]
+    - [0x10A60, c, leo/lib/leomode_sel]
+    - [0x10B10, c, leo/lib/leord_capa]
+    - [0x10BB0, c, leo/lib/leoutil]
+    - [0x10E00, c, leo/lib/rezero]
+    - [0x10E60, c, leo/lib/leorezero]
+    - [0x10F00, c, leo/lib/bytetolba]
+    - [0x11060, c, leo/lib/leoreset]
+    - [0x11180, c, leo/lib/modeselect]
+    - [0x11210, c, leo/lib/readcapacity]
+    - [0x112A0, c, leo/lib/leotranslat]
+    - [0x11540, c, leo/lib/leotimer]
+    - [0x11A50, data, leo/lib/getkadr]  #hasm
+    - [0x12550, data, leo/lib/getaadr]  #hasm
+    - [0x149E0, c, leo/lib/leowrite]
+    - [0x14B10, c, leo/lib/cjcreateleomanager]
+    - [0x14D50, c, leo/lib/cacreateleomanager]
+    - [0x14F80, c, leo/lib/testunitready]
+    - [0x15020, c, leo/lib/leotestunit]
+    - [0x15060, c, leo/lib/readrtc]
+    - [0x150C0, c, leo/lib/leoseek]
+    - [0x15180, c, leo/lib/seek]
+    - [0x151E0, asm]
     - [0x34A20, data]
+
+    - [0x59080, .data, leo/lib/leofunc]
+    - [0x590D0, .data, leo/lib/leocmdex]
+    - [0x590F0, .data, leo/lib/driverominit]
+    - [0x59100, .data, leo/lib/leord_diskid]
+    - [0x59120, .data, leo/lib/createleomanager]
+    - [0x59130, data]
+
+    - [0x5BDC0, .rodata, leo/lib/leofunc]
+    - [0x5BDD0, .rodata, leo/lib/leocmdex]
+    - [0x5BE80, .rodata, leo/lib/leord_diskid]
+    - [0x5BE90, .rodata, leo/lib/leomecha]
+    - [0x5BF00, .rodata, leo/lib/leo_tbl]
+    - [0x5C0E0, .rodata, leo/lib/leoc2ecc]
+    - [0x5C500, .rodata, leo/lib/leomseq_tbl]
+    - [0x5C580, .rodata, leo/lib/leotimer]
+    - [0x5C5A0, data]
 
     # DATA - Microcode
     - { start: 0x76380, type: databin, use_src_path: True, name: rsp/f3dex2 }
@@ -44,6 +105,22 @@ segments:
     - { start: 0x76B90, type: databin, use_src_path: True, name: rsp/f3dpex2 }
 
     - [0x76FB0, pad]
+
+    - { type: .bss, vram: 0x800B86C0, name: leo/lib/leofunc }
+    - { type: .bss, vram: 0x800B87C8, name: leo/lib/leoram }
+    - { type: .bss, vram: 0x800B93E0, name: leo/lib/leoint }
+    - { type: .bss, vram: 0x800B9400, name: leo/lib/leocmdex }
+    - { type: .bss, vram: 0x800B9430, name: leo/lib/driverominit }
+    - { type: .bss, vram: 0x800B94B0, name: leo/lib/leodiskinit }
+    - { type: .bss, vram: 0x800B9530, name: leo/lib/leomecha }
+    - { type: .bss, vram: 0x800B9540, name: leo/lib/leotempbuffer }
+    - { type: .bss, vram: 0x800B9630, name: leo/lib/leoc2_syndrome }
+    - { type: .bss, vram: 0x800B9D70, name: leo/lib/leoc2ecc }
+    - { type: .bss, vram: 0x800B9D80, name: leo/lib/createleomanager }
+    - { type: .bss, vram: 0x800B9D90, name: leo/lib/leointerrupt }
+    - { type: .bss, vram: 0x800BAD90, name: leo/lib/leomseq_tbl }
+
+
   - name: main
     type: code
     dir: main
