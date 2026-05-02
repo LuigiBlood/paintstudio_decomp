@@ -28,7 +28,10 @@ ROM := $(TARGET).d64
 ELF := $(BUILD_DIR)/$(TARGET).elf
 LD_SCRIPT := $(TARGET).ld
 LD_MAP := $(BUILD_DIR)/$(TARGET).map
-ASM_DIRS := asm asm/data asm/main asm/capture asm/overlays/printer asm/overlays/saveload asm/overlays/camera asm/data/main asm/data/capture asm/data/overlays/printer asm/data/overlays/saveload asm/data/overlays/camera
+ASM_DIRS := asm asm/data asm/main asm/capture \
+	asm/overlays/printer asm/overlays/saveload asm/overlays/camera \
+	asm/data/main asm/data/capture asm/data/overlays/printer asm/data/overlays/saveload asm/data/overlays/camera \
+	asm/leo/lib asm/data/leo/lib
 DATA_DIRS := bin assets
 SRC_DIRS := $(shell test ! -d src || find src -type d)
 

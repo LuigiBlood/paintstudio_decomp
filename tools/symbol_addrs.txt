@@ -131,51 +131,52 @@ dayupper = 0x8005C788;
 
 
 //libleo 2.0J .bss
+LEOpost_que = 0x800B86C0;
+LEOpost_que_buf = 0x800B86D8;
+LEO_sys_data = 0x800B86E0;
+LEOcommandThread = 0x800B87C8;
+LEOinterruptThread = 0x800B8978;
+LEOcommandThreadStack = 0x800B8B28;
+LEOinterruptThreadStack = 0x800B8F28;
 LEOcommand_que = 0x800B9328;
 LEOevent_que = 0x800B9340;
 LEOcontrol_que = 0x800B9358;
-LEOrw_flags = 0x800B93C6;
 LEOdma_que = 0x800B9370;
 LEOblock_que = 0x800B9388;
-LEOpost_que = 0x800B86C0;
-LEOpost_que_buf = 0x800B86D8;
-LEOcommandThread = 0x800B87C8;
-LEOinterruptThread = 0x800B8978;
 LEOevent_que_buf = 0x800B93A0;
 LEOcontrol_que_buf = 0x800B93A4;
 LEOdma_que_buf = 0x800B93A8;
 LEOblock_que_buf = 0x800B93B0;
-LEOclr_que_flag = 0x800B93C5;
-LEOc2ctrl_que_buf = 0x800B93E0;
-LEOc2ctrl_que = 0x800B93E8;
 LEOwrite_pointer = 0x800B93B4;
 LEOcur_command = 0x800B93B8;
 LEOasic_bm_ctl_shadow = 0x800B93BC;
 LEOasic_seq_ctl_shadow = 0x800B93C0;
-LEOPiInfo = 0x800B9400;
-LEOC2_Syndrome = 0x800B9630;
 LEOdrive_flag = 0x800B93C4;
-LEO_country_code = 0x800B93DC;
-LEOPiDmaParam = 0x800B9408;
-LEO_currentCommand = 0x800B9420;
-LEO_sys_data = 0x800B86E0;
+LEOclr_que_flag = 0x800B93C5;
+LEOrw_flags = 0x800B93C6;
 LEOdisk_type = 0x800B93C8;
 LEOtgt_param = 0x800B93D0;
+LEO_country_code = 0x800B93DC;
+LEOc2ctrl_que_buf = 0x800B93E0;
+LEOc2ctrl_que = 0x800B93E8;
+LEOPiInfo = 0x800B9400;
+LEOPiDmaParam = 0x800B9408;
+LEO_currentCommand = 0x800B9420;
 DriveRomHandle = 0x800B9430;
 LeoDiskHandle = 0x800B94B0;
 __osDiskHandle = 0x800B9524;
-LEO_TempBuffer = 0x800B9540;
 asic_cur_status = 0x800B9530;
 unit_atten = 0x800B9534;
+LEO_TempBuffer = 0x800B9540;
+LEOC2_Syndrome = 0x800B9630;
 LEOc2_param = 0x800B9D70;
 __leoVersion = 0x800B9D80;
 leoDiskStack = 0x800B9D90;
 mseq_tbl = 0x800BAD90;
-LEOcommandThreadStack = 0x800B8B28;
-LEOinterruptThreadStack = 0x800B8F28;
 
 
 //libultra 2.0J .text
+__osPiCreateAccessQueue = 0x800153E0;
 __osPiGetAccess = 0x80015430;
 __osPiRelAccess = 0x80015474;
 osSendMesg = 0x800154A0;
@@ -220,8 +221,6 @@ __OSGlobalIntMask = 0x80059BD0;
 
 
 //TODO
-__osPiCreateAccessQueue = 0x800153E0;
-
 osViGetCurrentLine = 0x800156B0;
 __osDequeueThread = 0x80015800;
 guAlign = 0x800159D4;
