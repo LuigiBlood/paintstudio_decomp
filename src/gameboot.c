@@ -7,6 +7,12 @@
 #define THREAD_ID_IDLE 1
 #define THREAD_ID_MAIN 6
 
+typedef struct {
+    u8 unk0[0xC000];
+    u8 padC000[0x120];
+    u8 unkC120[0xC0000];
+} Unk;
+
 extern u32 D_80037D20[];
 extern s32 D_80037F58;
 extern OSThread D_800791B0;
@@ -28,11 +34,12 @@ extern OSThread D_80081C10;
 extern OSScClient D_80081DC0;
 extern OSMesgQueue D_80081DC8;
 extern OSMesg D_80081DE0[32];
-extern u16 D_800351D0;
-extern u16 D_800351D4;
-extern u16 D_800351D8;
-extern u16* D_800351DC;
-extern u32 D_80052720[4];
+extern Unk D_80038188;
+extern u8 D_800442A8[];
+extern u8 D_8004FF50[];
+extern u32 D_800351E0;
+extern u32 D_80037D24;
+extern u32 D_80052720[];
 extern OSViMode D_80059C80;
 extern OSViMode D_80059F50;
 extern u16* D_80081E60;
@@ -43,13 +50,24 @@ extern s32 D_8011F524;
 extern u8 D_80315AE0[];
 extern u16* D_80000318;
 
+u16 D_800351D0 = 240;
+u16 D_800351D4 = 320;
+u16 D_800351D8 = 1;
+u16* D_800351DC = 0;
+
 void func_800013D4(void *arg);
 void func_80001450(void *arg);
 void func_800014D4(void);
+void func_8000152C(void);
 void func_800015BC(void *arg);
 void func_800016F8(u16 arg0);
+void func_80001B00(void);
+void func_80001C98(void);
+void func_80002788(void);
 void func_8000327C(void *arg);
 void func_800050B0(void);
+void func_800BDB80(void *arg);
+void func_800D7800(s32 arg0);
 
 void func_80001360(void *arg) {
     osInitialize();
@@ -68,11 +86,60 @@ void func_800013D4(void *arg) {
     while (TRUE) {}
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/gameboot/func_80001450.s")
+void func_80001450(void *arg) {
+    D_80052720[0] = 0;
+    D_80052720[4] = 0;
+    func_800015BC(arg);
+    func_80001B00();
+    func_80002788();
+    func_80001C98();
+    D_800351E0 = 1;
+    D_80037D24 = 1;
+    func_800D7800(0);
+    func_8000152C();
 
-#pragma GLOBAL_ASM("asm/nonmatchings/gameboot/func_800014D4.s")
+    while (TRUE) {
+        func_800BDB80(arg);
+    }
+}
 
-#pragma GLOBAL_ASM("asm/nonmatchings/gameboot/func_8000152C.s")
+void func_800014D4(void) {
+    u8 *stackPtr;
+    s32 i;
+
+    stackPtr = D_8007DC10;
+    for (i = 0; i < sizeof(D_8007DC10); ++i) {
+        *stackPtr++ = 0xCC;
+    }
+
+    D_8007DC10[0] = 'H';
+    D_8007DC10[1] = 'E';
+    D_8007DC10[2] = 'A';
+    D_8007DC10[3] = 'D';
+}
+
+void func_8000152C(void) {
+    u8 *stackPtr0;
+    u8 *stackPtr1;
+    s32 i;
+
+    stackPtr0 = D_80038188.unk0;
+    stackPtr1 = D_80038188.unkC120;
+    for (i = 0; i < 0xC000; ++i) {
+        *stackPtr0++ = 0xCC;
+        *stackPtr1++ = 0xCC;
+    }
+
+    D_80038188.unk0[0xC000 - 4] = 'T';
+    D_80038188.unk0[0xC000 - 3] = 'A';
+    D_80038188.unk0[0xC000 - 2] = 'I';
+    D_80038188.unk0[0xC000 - 1] = 'L';
+
+    D_80038188.unkC120[0xC000 - 4] = 'T';
+    D_80038188.unkC120[0xC000 - 3] = 'A';
+    D_80038188.unkC120[0xC000 - 2] = 'I';
+    D_80038188.unkC120[0xC000 - 1] = 'L';
+}
 
 void func_800015BC(void *arg) {
     D_8007DA58 = osDriveRomInit();

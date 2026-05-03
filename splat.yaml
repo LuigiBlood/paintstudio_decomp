@@ -84,6 +84,8 @@ segments:
     - [0x151E0, asm]
 
     - [0x34A20, data]
+    - [0x34FD0, .data, gameboot]
+    - [0x34FE0, data]
 
     #--libleo .data
     - [0x59080, data, leo/lib/leofunc]
