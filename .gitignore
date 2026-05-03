@@ -9,3 +9,4 @@ tools/ido_recomp
 *.s
 .DS_Store
 *.ld
+.venv/

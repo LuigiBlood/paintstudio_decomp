@@ -10,13 +10,20 @@ Required base ROM file:
 
 Convert a Mario Artist Paint Studio NDD dump to D64 with [leo64dd_python](https://github.com/LuigiBlood/leo64dd_python).
 The RAM area should be only `0xFF`.
-
+You can create the dmpj.d64 file by taking a .ndd file (md5 `8485643e5830cd67ed4c0a5fd49e2491`) and running `python3 leo64ddfile.py d64 <path-to-ndd-file> <path-to-repo>/dmpj.d64`
 
 ## Quick Start
+
+This repository uses Git submodules. Make sure to either clone the repository with the `--recurse-submodules` flag or to run `git submodule update --init --recursive` after the initial clone.
+
+When pulling updates, you can update all submodules with `git submodule update --recursive`.
 
 If dependencies are already installed and `dmpj.d64` is in the repo root:
 
 ```sh
+python3 -m venv .venv
+source .venv/bin/activate
+python3 -m pip install -r requirements.txt
 python3 -m pip install -r tools/splat/requirements.txt
 make setup
 make
@@ -96,6 +103,9 @@ brew install \
 Install the Python dependencies:
 
 ```sh
+python3 -m venv .venv
+source .venv/bin/activate
+python3 -m pip install -r requirements.txt
 python3 -m pip install -r tools/splat/requirements.txt
 ```
 
