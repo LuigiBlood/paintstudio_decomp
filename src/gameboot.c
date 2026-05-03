@@ -58,7 +58,7 @@ extern u8 D_80315AE0[];
 extern u16* D_80000318;
 extern char D_800351EC[];
 extern char D_800351F0[];
-extern s32 D_80076414;
+extern s32 gMfsError;
 extern u8 D_80076428[];
 extern u8 diskQBuf[];
 extern char D_8005B594[];
@@ -77,16 +77,16 @@ void func_800016F8(u16 arg0);
 void func_80001B00(void);
 void func_80001C98(void);
 void func_80002788(void);
-s32 func_80002CE8(s32 arg0);
+s32 DisplayDiskError(s32 arg0);
 void func_80002788(void);
-s32 func_8002707C(s32 arg0, void *arg1, s32 arg2);
+s32 Mfs_CreateLeoManager(s32 arg0, void *arg1, s32 arg2);
 s32 func_800273FC(void);
 void func_80027680(s32 arg0, s32 arg1, char *arg2);
 s32 func_80027B4C(void);
-void func_80027FD0(char *arg0, char *arg1);
+void Mfs_SetGameCode(char *arg0, char *arg1);
 s32 LeoLBAToByte(s32 startlba, u32 nlbas, s32 *bytes);
 void func_800283E4(void);
-void func_8002866C(void);
+void Mfs_CopyRamAreaFromBackup(void);
 void func_80029DEC(void *arg0, void *arg1, void *arg2, void *arg3, void *arg4, void *arg5);
 void func_8000327C(void *arg);
 void func_800050B0(void);
@@ -272,17 +272,17 @@ void func_80001B00(void) {
     s32 status;
 
     retryCount = 0;
-    func_80027FD0(D_800351EC, D_800351F0);
-    if (func_8002707C(0, diskQBuf, 1) < 0) {
-        func_80002CE8(D_80076414);
+    Mfs_SetGameCode(D_800351EC, D_800351F0);
+    if (Mfs_CreateLeoManager(0, diskQBuf, 1) < 0) {
+        DisplayDiskError(gMfsError);
         while (TRUE) {} // hangs on error
     }
 
     do {
         status = func_800273FC();
-        state = D_80076414;
+        state = gMfsError;
         if (status == -1) {
-            state = func_80002CE8(D_80076414);
+            state = DisplayDiskError(gMfsError);
             func_80001A44();
         }
     } while (state == 0x64);
@@ -293,19 +293,19 @@ void func_80001B00(void) {
         status = func_80027B4C();
         if (status <= 0) {
             if (retryCount == 0) {
-                func_8002866C();
+                Mfs_CopyRamAreaFromBackup();
                 retryCount++;
             } else if (retryCount == 1) {
                 func_80027680(1, 0, D_8005B594);
                 retryCount++;
             } else {
-                func_80002CE8(D_80076414);
+                DisplayDiskError(gMfsError);
                 retryCount = 0;
             }
         } else if (status == -1) {
             retryCount = 0;
             func_800283E4();
-            func_80002CE8(D_80076414);
+            DisplayDiskError(gMfsError);
         } else {
             break;
         }
@@ -350,7 +350,7 @@ u32 func_80001F20(u32 startLba, u32 endLba, u32 *lbaCount) {
 
 #pragma GLOBAL_ASM("asm/nonmatchings/gameboot/func_80002B90.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/gameboot/func_80002CE8.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/gameboot/DisplayDiskError.s")
 
 #pragma GLOBAL_ASM("asm/nonmatchings/gameboot/func_800030B0.s")
 

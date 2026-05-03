@@ -5,28 +5,47 @@ osResetType = 0x8000030C;
 osAppNMIBuffer = 0x8000031C;
 
 //-----boot segment
+//.text
+DisplayDiskError = 0x80002CE8;
+DisplayMessage = 0x80009848;
+RenderText = 0x8000A884;
+GetCharWidth = 0x8000AFA4;
+GetCharKern = 0x8000AFFC;
+
 //libleo 2.0J .text
+//-- leo/lib/readwrite
 LeoReadWrite = 0x8000C700;
+//-- leo/lib/leofunc
 leoInitialize = 0x8000C790;
 leoCommand = 0x8000C964;
 LeoReset = 0x8000CAC4;
 __leoSetReset = 0x8000CB54;
 LeoResetClear = 0x8000CB78;
+//-- leo/lib/leoint
 leointerrupt = 0x8000CC00;
 read_write_track = 0x8000CD90;
 leoChk_mecha_int = 0x8000D38C;
 leosetup_BM = 0x8000D3F4;
 leochk_err_reg = 0x8000D4DC;
+//-- leo/lib/leocmdex
 leomain = 0x8000D600;
 leoRead_system_area = 0x8000DA7C;
+//-- leo/lib/leoread
 leoRead = 0x8000DC90;
 leoRead_common = 0x8000DCBC;
+//-- leo/lib/lbatobyte
 LeoLBAToByte = 0x8000DE50;
+//-- leo/lib/driverominit
 osDriveRomInit = 0x8000DFA0;
+//-- leo/lib/leoinquiry
 leoInquiry = 0x8000E100;
+//-- leo/lib/leodiskinit
 osLeoDiskInit = 0x8000E1B0;
+//-- leo/lib/readdiskid
 LeoReadDiskID = 0x8000E250;
+//-- leo/lib/leord_diskid
 leoReadDiskId = 0x8000E2B0;
+//-- leo/lib/leomecha
 leoAnalize_asic_status = 0x8000E440;
 leoChk_asic_ready = 0x8000E54C;
 leoChk_done_status = 0x8000E634;
@@ -49,7 +68,9 @@ leoClrUA_RESET = 0x8000ED30;
 leoClrUA_MEDIUM_CHANGED = 0x8000ED4C;
 leoSetUA_MEDIUM_CHANGED = 0x8000ED68;
 leoInitUnit_atten = 0x8000ED80;
+//-- leo/lib/spdlmotor
 LeoSpdlMotor = 0x8000ED90;
+//-- leo/lib/leoc2ecc
 leoC2_Correction = 0x8000EE50;
 leoC2_single_ecc = 0x8000EEDC;
 leoC2_double_ecc = 0x8000EFB0;
@@ -57,62 +78,99 @@ leoC2_3_ecc = 0x8000F230;
 leoC2_4_ecc = 0x8000F618;
 leoAlpha_mult = 0x8000FEB4;
 leoAlpha_div = 0x8000FEF8;
+//-- leo/lib/createleomanager
 LeoCreateLeoManager = 0x8000FF40;
+//-- leo/lib/leointerrupt
 __osLeoInterrupt = 0x800100B0;
 __osLeoAbnormalResume = 0x80010610;
 __osLeoResume = 0x800106C4;	//to be looked into
+//-- leo/lib/setrtc
 LeoSetRTC = 0x80010780;
 leoVerifyRTC = 0x80010840;
+//-- leo/lib/leomseq_tbl
 leoSet_mseq = 0x800108F0;
+//-- leo/lib/leomotor
 leoStart_stop = 0x80010AA0;
+//-- leo/lib/driveexist
 LeoDriveExist = 0x80010B90;
+//-- leo/lib/leomode_sel
 leoMode_sel = 0x80010C60;
+//-- leo/lib/leord_capa
 leoRd_capacity = 0x80010D10;
+//-- leo/lib/leoutil
 leoLba_to_phys = 0x80010DB0;
 leoLba_to_vzone = 0x80010FA4;
+//-- leo/lib/rezero
 LeoRezero = 0x80011000;
+//-- leo/lib/leorezero
 leoRezero = 0x80011060;
+//-- leo/lib/bytetolba
 LeoByteToLBA = 0x80011100;
+//-- leo/lib/leoreset
 leoClr_queue = 0x80011260;
 leoClr_reset = 0x80011308;
+//-- leo/lib/modeselect
 LeoModeSelectAsync = 0x80011380;
+//-- leo/lib/readcapacity
 LeoReadCapacity = 0x80011410;
+//-- leo/lib/leotranslat
 leoTranslate = 0x800114A0;
+//-- leo/lib/leotimer
 leoReadTimer = 0x80011740;
 leoSetTimer = 0x800117FC;
 __locReadTimer = 0x80011A34;
 __locSetTimer = 0x80011BA4;
+//-- leo/lib/getkadr
 LeoGetKAdr = 0x80011D50;
 LeoGetKAdr_tbl = 0x80011D08;	//data
+//-- leo/lib/getaadr
 LeoGetAAdr = 0x80012750;
 LeoGetAAdr_tbl = 0x800127C0;	//data
+//-- leo/lib/leowrite
 leoWrite = 0x80014BE0;
+//-- leo/lib/cjcreateleomanager
 LeoCJCreateLeoManager = 0x80014D10;
+//-- leo/lib/cacreateleomanager
 LeoCACreateLeoManager = 0x80014F50;
+//-- leo/lib/testunitready
 LeoTestUnitReady = 0x80015180;
+//-- leo/lib/leotestunit
 leoTest_unit_rdy = 0x80015220;
+//-- leo/lib/readrtc
 LeoReadRTC = 0x80015260;
+//-- leo/lib/leoseek
 leoSeek = 0x800152C0;
+//-- leo/lib/seek
 LeoSeek = 0x80015380;
 
 //libleo 2.0J .data
+//-- leo/lib/leofunc
 __leoResetCalled = 0x80059280;
 __leoQueuesCreated = 0x80059284;
 LEO_cmd_tbl = 0x80059290;
+//-- leo/lib/leocmdex
 leo_sys_read_cmd = 0x800592D0;
+//-- leo/lib/driverominit
 driverominit_first = 0x800592F0;
+//-- leo/lib/leord_diskid
 read_id_cmd = 0x80059300;
+//-- leo/lib/createleomanager
 __leoActive = 0x80059320;
 
 //libleo 2.0J .rodata
+//-- leo/lib/leofunc
 LEO_MESG_ZERO = 0x8005BFC0;
+//-- leo/lib/leocmdex
 leo_sys_form_lbas = 0x8005BFD0;
 //leocmdex_rodata_0008 = 0x8005BFD8;	//jmp table
 //leocmdex_rodata_0040 = 0x8005C010;	//jmp table
 //leocmdex_rodata_0078 = 0x8005C048;	//jmp table
+//-- leo/lib/leord_diskid
 leo_disk_id_lba = 0x8005C080;
+//-- leo/lib/leomecha
 //leomecha_rodata_0000 = 0x8005C090;	//jmp table
 //leomecha_rodata_0034 = 0x8005C0C4;	//jmp table
+//-- leo/lib/leo_tbl
 LEOfirmware_rev = 0x8005C100;
 LEOBYTE_TBL1 = 0x8005C108;
 LEOBYTE_TBL2 = 0x8005C114;
@@ -122,17 +180,22 @@ LEOVZONE_PZONEHD_TBL = 0x8005C228;
 LEOZONE_OUTERCYL_TBL = 0x8005C298;
 LEORAM_START_LBA = 0x8005C2A8;
 LEORAM_BYTE = 0x8005C2B8;
+//-- leo/lib/leoc2ecc
 ganlog = 0x8005C2E0;
 glog = 0x8005C4E0;
+//-- leo/lib/leomseq_tbl
 rd_mseq_code = 0x8005C700;
 wt_mseq_code = 0x8005C740;
+//-- leo/lib/leotimer
 ymdupper = 0x8005C780;
 dayupper = 0x8005C788;
 
 
 //libleo 2.0J .bss
+//-- leo/lib/leofunc
 LEOpost_que = 0x800B86C0;
 LEOpost_que_buf = 0x800B86D8;
+//-- leo/lib/leoram
 LEO_sys_data = 0x800B86E0;
 LEOcommandThread = 0x800B87C8;
 LEOinterruptThread = 0x800B8978;
@@ -157,55 +220,83 @@ LEOrw_flags = 0x800B93C6;
 LEOdisk_type = 0x800B93C8;
 LEOtgt_param = 0x800B93D0;
 LEO_country_code = 0x800B93DC;
+//-- leo/lib/leoint
 LEOc2ctrl_que_buf = 0x800B93E0;
 LEOc2ctrl_que = 0x800B93E8;
+//-- leo/lib/leocmdex
 LEOPiInfo = 0x800B9400;
 LEOPiDmaParam = 0x800B9408;
 LEO_currentCommand = 0x800B9420;
+//-- leo/lib/driverominit
 DriveRomHandle = 0x800B9430;
+//-- leo/lib/leodiskinit
 LeoDiskHandle = 0x800B94B0;
 __osDiskHandle = 0x800B9524;
+//-- leo/lib/leomecha
 asic_cur_status = 0x800B9530;
 unit_atten = 0x800B9534;
+//-- leo/lib/leotempbuffer
 LEO_TempBuffer = 0x800B9540;
+//-- leo/lib/leoc2_syndrome
 LEOC2_Syndrome = 0x800B9630;
+//-- leo/lib/leoc2ecc
 LEOc2_param = 0x800B9D70;
+//-- leo/lib/createleomanager
 __leoVersion = 0x800B9D80;
+//-- leo/lib/leointerrupt
 leoDiskStack = 0x800B9D90;
+//-- leo/lib/leomseq_tbl
 mseq_tbl = 0x800BAD90;
 
 
 //libultra 2.0J .text
+//-- libultra/io/piacs
 __osPiCreateAccessQueue = 0x800153E0;
 __osPiGetAccess = 0x80015430;
 __osPiRelAccess = 0x80015474;
+//-- libultra/os/sendmesg
 osSendMesg = 0x800154A0;
+//-- libultra/os/stopthread
 osStopThread = 0x800155F0;
+//-- libultra/os/recvmesg
 osRecvMesg = 0x800156C0;
+//-- libultra/os/thread
+__osDequeueThread = 0x80015800;
+//-- libultra/gu/rotate
+guRotateF = 0x80015840;	//difference
+guRotate = 0x800159D4;
+//-- libultra/gu/sinf
+sinf = 0x80015A30;
 
+__osEnqueueAndYield = 0x800167DC;
 __osEnqueueThread = 0x800168DC;
 __osPopThread = 0x80016924;
-
 bzero = 0x80016B60;
 
 osCreateThread = 0x80017240;
 osWritebackDCache = 0x80017E30;
-
 osInitialize = 0x80017EB0;
+
 createSpeedParam = 0x80018158;
 
+guMtxF2L = 0x80019000;
+guMtxIdentF = 0x80019100;
+
 osSetEventMesg = 0x8001F9F0;
+
+osEPiStartDma = 0x80020C40;
 osCreateMesgQueue = 0x80020E40;
 osInvalDCache = 0x80020EC0;
+
 osSetThreadPri = 0x800213A0;
 osGetThreadPri = 0x80021480;
 __osEPiRawStartDma = 0x80021650;
 
+guNormalize = 0x80022000;
 bcopy = 0x800220C0;
-
 __osDisableInt = 0x80022AB0;
 __osRestoreInt = 0x80022B20;
-osEPiStartDma = 0x80020C40;
+cosf = 0x80022B70;
 osEPiReadIo = 0x80022CE0;
 
 osEPiWriteIo = 0x800236D0;
@@ -215,16 +306,88 @@ osStartThread = 0x80025620;
 __osSetHWIntrRoutine = 0x80026190;
 
 
-//libultra 2.0J stuff
+//libultra 2.0J .data
+//-- libultra/io/piacs
+__osPiAccessQueueEnabled = 0x80059330;
+//-- libultra/os/thread
+__osThreadTail = 0x80059340;
+__osRunQueue = 0x80059348;
+__osActiveQueue = 0x8005934C;
+__osRunningThread = 0x80059350;
+__osFaultedThread = 0x80059354;
+//--
+
+//libultra 2.0J .rodata
+//-- libultra/gu/rotate
+rotate_rodata_0000 = 0x8005C7A0; //dtor
+//-- libultra/gu/sinf
+sinf_P = 0x8005C7B0;
+sinf_rpi = 0x8005C7D8;
+sinf_pihi = 0x8005C7E0;
+sinf_pilo = 0x8005C7E8;
+sinf_zero = 0x8005C7F0;
+//-- ?
+
+
+//libultra 2.0J .bss
+//-- libultra/io/piacs
+piAccessBuf = 0x800BADD0;
+__osPiAccessQueue = 0x800BADD8;
+//-- libultra/gu/rotate
+rotate_bss_0000 = 0x800BADF0;
+
+
+//libultra 2.0J unsorted (but confirmed)
 __OSGlobalIntMask = 0x80059BD0;
 
+
+//libmfs .text
+Mfs_CreateLeoManager = 0x8002707C;
+Mfs_ReadDiskId = 0x80027260;
+Mfs_ValidateRamVolume = 0x80027A84;
+Mfs_SetGameCode = 0x80027FD0;
+Mfs_CalculateVolumeChecksum = 0x8002831C;
+Mfs_CopyRamAreaFromBackup = 0x8002866C;
+Mfs_ReadLBA = 0x8002A434;
+Mfs_WriteLBA = 0x8002A604;
+mfsStrnCpy = 0x8002AA88;
+mfsStrCat = 0x8002AB18;
+Mfs_DecodeTime = 0x8002ABB8;
+Mfs_EncodeTime = 0x8002ABE4;
+Mfs_SetDefaultLeoHandlerFuncs = 0x8002F340;
+Mfs_SetLeoHandlerFunc = 0x8002F3D8;
+
+//libmfs stuff
+gMfsError = 0x80076414;
+
+
+//-----main segment
+//-- osCap .text
+GetAngle = 0x80113E00;
+osCapInit = 0x80113F6C;
+osCapConvertToRGBA = 0x80114040;
+osCapCartRegInit = 0x80114A60;
+osCapCartDataInit = 0x80114AD8;
+osCapRead0000 = 0x80114B8C;
+osCapRead0004 = 0x80114BC0;
+osCapRead0008 = 0x80114BF4;
+osCapRead0180 = 0x80114C28;
+osCapWrite0000 = 0x80114C5C;
+osCapWrite0004 = 0x80114C90;
+osCapWrite0008 = 0x80114CC4;
+osCapWrite0180 = 0x80114CF8;
+osCapWrite0100 = 0x80114D2C;
+osCapInquiry = 0x80114D58;
+osCapCartInit = 0x8011502C;
+osCapStartDma = 0x80115058;
+osCapReadIo = 0x801151C0;
+osCapWriteIo = 0x801152A4;
+osCapConvertToI8 = 0x80115F50;
 
 
 //TODO
 osViGetCurrentLine = 0x800156B0;
-__osDequeueThread = 0x80015800;
-guAlign = 0x800159D4;
-sinf = 0x80015A30;
+
 alUnlink = 0x80015BF0;
 alLink = 0x80015C20;
 alClose = 0x80015C44;
@@ -236,12 +399,11 @@ osSpTaskLoad = 0x80015EDC;
 osSpTaskStartGo = 0x8001606C;
 osDestroyThread = 0x800160B0;
 __osExceptionPreamble = 0x800161C0;
-__osEnqueueAndYield = 0x800167DC;
+
 
 __osDispatchThread = 0x80016934;
 __osCleanupThread = 0x80016AB0;
-guRotateRPYF = 0x80016AC0;
-guRotateRPY = 0x80016B14;
+
 
 osPiWriteIo = 0x80016C00;
 osGbpakCheckConnector = 0x80016C40;
@@ -285,8 +447,8 @@ osViBlack = 0x80018E30;
 __osPiRawReadIo = 0x80018EA0;
 __osSiRawReadIo = 0x80018EF0;
 osSetIntMask = 0x80018F60;
-guMtxF2L = 0x80019000;
-guMtxIdentF = 0x80019100;
+
+
 guMtxIdent = 0x80019188;
 guMtxL2F = 0x800191B8;
 osViSetMode = 0x80019270;
@@ -393,7 +555,7 @@ __osTimerInterrupt = 0x80021AEC;
 __osSetTimerIntr = 0x80021C64;
 __osInsertTimer = 0x80021CD8;
 __osSetGlobalIntMask = 0x80021E60;
-guNormalize = 0x80022000;
+
 __osSetCompare = 0x80022090;
 
 alCopy = 0x800223D0;
@@ -404,7 +566,7 @@ __osViInit = 0x80022670;
 __osViSwapContext = 0x800227B0;
 osPiGetCmdQueue = 0x80022B40;
 MusPtrBankGetCurrent = 0x80022B58;
-cosf = 0x80022B70;
+
 
 osViSetSpecialFeatures = 0x80022D30;
 coss = 0x80022E90;
@@ -464,17 +626,13 @@ __osSpSetPc = 0x80026150;
 
 MusFxBankSetCurrent = 0x80026400;
 n64dd_createQ = 0x80026E60;
-n64dd_bcd_dec = 0x8002ABB8;
-n64dd_dec_bcd = 0x8002ABE4;
 osClockRate = 0x80053784;
 
 
 
 
-__osPiAccessQueueEnabled = 0x80059330;
-__osRunQueue = 0x80059348;
-__osActiveQueue = 0x8005934C;
-__osRunningThread = 0x80059350;
+
+
 sins_data_0000 = 0x80059370;
 sins_data_07FE = 0x80059B6E;
 __osHwIntTable = 0x80059B74;
@@ -522,7 +680,7 @@ __osViDevMgr = 0x8005B340;
 __additional_scanline = 0x8005B35C;
 aisetnextbuf_data_0000 = 0x8005B360;
 
-rotate_rodata_0000 = 0x8005C7A0;
+
 align_rodata_0000 = 0x8005C850;
 perspective_rodata_0000 = 0x8005C860;
 __osRcpImTable = 0x8005C870;
@@ -556,9 +714,8 @@ pimgr_bss_12A0 = 0x800B8780;
 
 
 
-siacs_bss_0000 = 0x800BADD0;
-__osPiAccessQueue = 0x800BADD8;
-rotate_bss_0000 = 0x800BADF0;
+
+
 __osContLastCmd = 0x800BAEA0;
 __osMaxControllers = 0x800BAEA1;
 __osEepromTimerQ = 0x800BAEC8;

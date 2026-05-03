@@ -31,8 +31,9 @@ segments:
     vram: 0x80000400
     align: 8
     subsegments:
-    - [0x0200, asm, entrypoint]
-    - [0x0250, data]
+    - [0x0200, asm, entrypoint] # maybe hasm
+    - [0x0250, data] # list of LBA Start/End Mapping Info (unused here)
+
     - [0x0260, asm]
     - [0x1160, c, gameboot]
     - [0x76B0, asm]
@@ -80,9 +81,17 @@ segments:
     - [0x150C0, asm, leo/lib/leoseek]
     - [0x15180, asm, leo/lib/seek]
 
-    #--libultra 2.0J
-    - [0x151E0, asm]
+    #--libultra 2.0J .text
+    - [0x151E0, asm, libultra/io/piacs]
+    - [0x152A0, asm, libultra/os/sendmesg]
+    - [0x153F0, asm, libultra/os/stopthread]
+    - [0x154C0, asm, libultra/os/recvmesg]
+    - [0x15600, asm, libultra/os/thread]
+    - [0x15640, asm, libultra/gu/rotate]
+    - [0x15830, asm, libultra/gu/sinf]
+    - [0x159F0, asm] # todo
 
+    # data
     - [0x34A20, data]
     - [0x34FD0, .data, gameboot]
     - [0x34FE0, data]
@@ -93,8 +102,12 @@ segments:
     - [0x590F0, data, leo/lib/driverominit]
     - [0x59100, data, leo/lib/leord_diskid]
     - [0x59120, data, leo/lib/createleomanager]
-    - [0x59130, data]
+    #--libultra 2.0J .data
+    - [0x59130, data, libultra/io/piacs]
+    - [0x59140, data, libultra/os/thread]
+    - [0x59160, data]
 
+    # rodata
     #--libleo .rodata
     - [0x5BDC0, rodata, leo/lib/leofunc]
     - [0x5BDD0, rodata, leo/lib/leocmdex]
@@ -104,15 +117,19 @@ segments:
     - [0x5C0E0, rodata, leo/lib/leoc2ecc]
     - [0x5C500, rodata, leo/lib/leomseq_tbl]
     - [0x5C580, rodata, leo/lib/leotimer]
-    - [0x5C5A0, rodata]
+    #--libultra 2.0J .rodata
+    - [0x5C5A0, rodata, libultra/gu/rotate]
+    - [0x5C5B0, rodata, libultra/gu/sinf]
+    - [0x5C600, rodata]
 
     # DATA - Microcode
     - { start: 0x76380, type: databin, use_src_path: True, name: rsp/f3dex2 }
     - { start: 0x767A0, type: databin, use_src_path: True, name: rsp/s2dex2 }
     - { start: 0x76B90, type: databin, use_src_path: True, name: rsp/f3dpex2 }
 
-    - [0x76FB0, pad]
+    - [0x76FB0, pad] # end
 
+    #--libleo .bss
     #- { type: .bss, vram: 0x800B86C0, name: leo/lib/leofunc }
     #- { type: .bss, vram: 0x800B86E0, name: leo/lib/leoram }
     #- { type: .bss, vram: 0x800B93E0, name: leo/lib/leoint }
@@ -126,6 +143,10 @@ segments:
     #- { type: .bss, vram: 0x800B9D80, name: leo/lib/createleomanager }
     #- { type: .bss, vram: 0x800B9D90, name: leo/lib/leointerrupt }
     #- { type: .bss, vram: 0x800BAD90, name: leo/lib/leomseq_tbl }
+
+    #--libultra 2.0J .bss
+    #- { type: .bss, vram: 0x800BADD0, name: libultra/io/piacs }
+    #- { type: .bss, vram: 0x800BADF0, name: libultra/gu/rotate }
   - name: main
     type: code
     dir: main
