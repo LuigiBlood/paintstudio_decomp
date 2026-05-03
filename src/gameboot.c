@@ -39,15 +39,29 @@ extern u8 D_8004FF50[0xC000 - ARRAYCOUNT(D_800442A8)];
 extern u32 D_800351E0;
 extern u32 D_80037D24;
 extern u32 D_80052720[];
+extern u32 D_80052730;
 extern OSViMode D_80059C80;
 extern OSViMode D_80059F50;
 extern u16* D_80081E60;
 extern u16* D_80081E64;
 extern u16* D_80081E68;
 extern u32 D_80081E70;
+extern u32 D_80081E74;
+extern u32 D_80081E78;
+extern u32 D_80081E7C;
+extern u32 D_80081E80;
+extern u32 D_80081E84;
+extern u32 D_80081E88;
 extern s32 D_8011F524;
+extern u8 D_801243E8[];
 extern u8 D_80315AE0[];
 extern u16* D_80000318;
+extern char D_800351EC[];
+extern char D_800351F0[];
+extern s32 D_80076414;
+extern u8 D_80076428[];
+extern u8 diskQBuf[];
+extern char D_8005B594[];
 
 u16 D_800351D0 = 240;
 u16 D_800351D4 = 320;
@@ -63,6 +77,17 @@ void func_800016F8(u16 arg0);
 void func_80001B00(void);
 void func_80001C98(void);
 void func_80002788(void);
+s32 func_80002CE8(s32 arg0);
+void func_80002788(void);
+s32 func_8002707C(s32 arg0, void *arg1, s32 arg2);
+s32 func_800273FC(void);
+void func_80027680(s32 arg0, s32 arg1, char *arg2);
+s32 func_80027B4C(void);
+void func_80027FD0(char *arg0, char *arg1);
+s32 LeoLBAToByte(s32 startlba, u32 nlbas, s32 *bytes);
+void func_800283E4(void);
+void func_8002866C(void);
+void func_80029DEC(void *arg0, void *arg1, void *arg2, void *arg3, void *arg4, void *arg5);
 void func_8000327C(void *arg);
 void func_800050B0(void);
 void func_800BDB80(void *arg);
@@ -241,7 +266,53 @@ void func_80001A44(void) {
     }
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/gameboot/func_80001B00.s")
+void func_80001B00(void) {
+    s32 state;
+    s32 retryCount;
+    s32 status;
+
+    retryCount = 0;
+    func_80027FD0(D_800351EC, D_800351F0);
+    if (func_8002707C(0, diskQBuf, 1) < 0) {
+        func_80002CE8(D_80076414);
+        while (TRUE) {} // hangs on error
+    }
+
+    do {
+        status = func_800273FC();
+        state = D_80076414;
+        if (status == -1) {
+            state = func_80002CE8(D_80076414);
+            func_80001A44();
+        }
+    } while (state == 0x64);
+
+    bcopy(D_80076428, D_801243E8, 0x20);
+
+    while (TRUE) {
+        status = func_80027B4C();
+        if (status <= 0) {
+            if (retryCount == 0) {
+                func_8002866C();
+                retryCount++;
+            } else if (retryCount == 1) {
+                func_80027680(1, 0, D_8005B594);
+                retryCount++;
+            } else {
+                func_80002CE8(D_80076414);
+                retryCount = 0;
+            }
+        } else if (status == -1) {
+            retryCount = 0;
+            func_800283E4();
+            func_80002CE8(D_80076414);
+        } else {
+            break;
+        }
+    }
+
+    func_80029DEC(&D_80081E74, &D_80081E78, &D_80081E7C, &D_80081E80, &D_80081E84, &D_80081E88);
+}
 
 #pragma GLOBAL_ASM("asm/nonmatchings/gameboot/func_80001C98.s")
 
@@ -249,7 +320,19 @@ void func_80001A44(void) {
 
 #pragma GLOBAL_ASM("asm/nonmatchings/gameboot/func_80001E54.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/gameboot/func_80001F20.s")
+u32 func_80001F20(u32 startLba, u32 endLba, u32 *lbaCount) {
+    s32 startByte;
+    s32 endByte;
+
+    if ((D_800351E0 != 0) && (D_80052730 == 1)) {
+        while (TRUE) {}
+    }
+
+    LeoLBAToByte(0, startLba, &startByte);
+    LeoLBAToByte(0, endLba, &endByte);
+    *lbaCount = endLba - startLba;
+    return endByte - startByte;
+}
 
 #pragma GLOBAL_ASM("asm/nonmatchings/gameboot/func_80001FA8.s")
 
