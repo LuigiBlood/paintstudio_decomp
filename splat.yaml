@@ -105,8 +105,18 @@ segments:
     - [0x17040, asm, libultra/os/createthread]
     - [0x17190, asm, libultra/io/contreaddata]
     - [0x17370, asm, libultra/io/siacs]
-    - [0x17430, asm] # libultra/io/controller
-
+    - [0x17430, asm, libultra/io/controller]
+    - [0x17770, asm, libultra/gu/align]
+    - [0x17980, asm, libultra/audio/synallocvoice]
+    - [0x17BB0, asm, libultra/os/virtualtophysical]
+    - [0x17C30, asm, libultra/os/writebackdcache]
+    - [0x17CB0, asm, libultra/os/initialize]
+    - [0x18000, asm, libultra/libc/ll]
+    - [0x182C0, asm, libultra/os/setsr]
+    - [0x182D0, asm, libultra/os/getsr]
+    - [0x182E0, asm, libultra/io/vigetcurrframebuf]
+    - [0x18320, asm, libultra/io/gbpakinit]
+    - [0x18550, asm]
 
 
     # data
@@ -127,7 +137,9 @@ segments:
     - [0x59170, data, libultra/gu/sins]
     - [0x59970, data, libultra/os/exceptasm]
     - [0x599A0, data, libultra/io/siacs]
-    - [0x599B0, data]
+    - [0x599B0, data, libultra/io/controller]
+    - [0x599C0, data, libultra/os/initialize]
+    - [0x599E0, data]
 
     # rodata
     #--libleo .rodata
@@ -143,7 +155,8 @@ segments:
     - [0x5C5A0, rodata, libultra/gu/rotate]
     - [0x5C5B0, rodata, libultra/gu/sinf]
     - [0x5C600, rodata, libultra/os/exceptasm]
-    - [0x5C650, rodata]
+    - [0x5C650, rodata, libultra/gu/align]
+    - [0x5C660, rodata]
 
     # DATA - Microcode
     - { start: 0x76380, type: databin, use_src_path: True, name: rsp/f3dex2 }
@@ -173,6 +186,9 @@ segments:
     #- { type: .bss, vram: 0x800BAE00, name: libultra/io/sptask }
     #- { type: .bss, vram: 0x800BAE40, name: libultra/io/siacs }
     #- { type: .bss, vram: 0x800BAE60, name: libultra/io/controller }
+    #- { type: .bss, vram: 0x800BAEF0, name: libultra/gu/align }
+    #- { type: .bss, vram: 0x800BAF00, name: libultra/os/initialize }
+    #- { type: .bss, vram: 0x800BAF10, name: libultra/io/gbpakinit }
 
   - name: main
     type: code
