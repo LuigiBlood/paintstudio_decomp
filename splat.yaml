@@ -70,8 +70,8 @@ segments:
     - [0x11210, asm, leo/lib/readcapacity]
     - [0x112A0, asm, leo/lib/leotranslat]
     - [0x11540, asm, leo/lib/leotimer]
-    - [0x11A50, data, leo/lib/getkadr]  #hasm
-    - [0x12550, data, leo/lib/getaadr]  #hasm
+    - [0x11A50, hasm, leo/lib/getkadr]
+    - [0x12550, hasm, leo/lib/getaadr]
     - [0x149E0, asm, leo/lib/leowrite]
     - [0x14B10, asm, leo/lib/cjcreateleomanager]
     - [0x14D50, asm, leo/lib/cacreateleomanager]
@@ -85,11 +85,29 @@ segments:
     - [0x151E0, asm, libultra/io/piacs]
     - [0x152A0, asm, libultra/os/sendmesg]
     - [0x153F0, asm, libultra/os/stopthread]
+    - [0x154B0, asm, libultra/io/vigetline]
     - [0x154C0, asm, libultra/os/recvmesg]
     - [0x15600, asm, libultra/os/thread]
     - [0x15640, asm, libultra/gu/rotate]
     - [0x15830, asm, libultra/gu/sinf]
-    - [0x159F0, asm] # todo
+    - [0x159F0, asm, libultra/audio/sl]
+    - [0x15AB0, asm, libultra/gu/sins]
+    - [0x15B20, asm, libultra/audio/synsetvol]
+    - [0x15BC0, asm, libultra/io/sptask]
+    - [0x15EB0, asm, libultra/os/destroythread]
+    - [0x15FC0, asm, libultra/os/exceptasm]
+    - [0x168C0, asm, libultra/gu/scale]
+    - [0x16960, asm, libultra/libc/bzero]
+    - [0x16A00, asm, libultra/io/piread]
+    - [0x16A40, asm, libultra/io/gbpakcheckconnector]
+    - [0x16ED0, asm, libultra/io/gbpakpower]
+    - [0x16FE0, data] # padding, but not 0xFFFFFFFF
+    - [0x17040, asm, libultra/os/createthread]
+    - [0x17190, asm, libultra/io/contreaddata]
+    - [0x17370, asm, libultra/io/siacs]
+    - [0x17430, asm] # libultra/io/controller
+
+
 
     # data
     - [0x34A20, data]
@@ -105,7 +123,11 @@ segments:
     #--libultra 2.0J .data
     - [0x59130, data, libultra/io/piacs]
     - [0x59140, data, libultra/os/thread]
-    - [0x59160, data]
+    - [0x59160, data, libultra/audio/sl]
+    - [0x59170, data, libultra/gu/sins]
+    - [0x59970, data, libultra/os/exceptasm]
+    - [0x599A0, data, libultra/io/siacs]
+    - [0x599B0, data]
 
     # rodata
     #--libleo .rodata
@@ -120,7 +142,8 @@ segments:
     #--libultra 2.0J .rodata
     - [0x5C5A0, rodata, libultra/gu/rotate]
     - [0x5C5B0, rodata, libultra/gu/sinf]
-    - [0x5C600, rodata]
+    - [0x5C600, rodata, libultra/os/exceptasm]
+    - [0x5C650, rodata]
 
     # DATA - Microcode
     - { start: 0x76380, type: databin, use_src_path: True, name: rsp/f3dex2 }
@@ -147,6 +170,10 @@ segments:
     #--libultra 2.0J .bss
     #- { type: .bss, vram: 0x800BADD0, name: libultra/io/piacs }
     #- { type: .bss, vram: 0x800BADF0, name: libultra/gu/rotate }
+    #- { type: .bss, vram: 0x800BAE00, name: libultra/io/sptask }
+    #- { type: .bss, vram: 0x800BAE40, name: libultra/io/siacs }
+    #- { type: .bss, vram: 0x800BAE60, name: libultra/io/controller }
+
   - name: main
     type: code
     dir: main

@@ -258,6 +258,8 @@ __osPiRelAccess = 0x80015474;
 osSendMesg = 0x800154A0;
 //-- libultra/os/stopthread
 osStopThread = 0x800155F0;
+//-- libultra/io/vigetline
+osViGetCurrentLine = 0x800156B0;
 //-- libultra/os/recvmesg
 osRecvMesg = 0x800156C0;
 //-- libultra/os/thread
@@ -266,28 +268,81 @@ __osDequeueThread = 0x80015800;
 guRotateF = 0x80015840;	//difference
 guRotate = 0x800159D4;
 //-- libultra/gu/sinf
-sinf = 0x80015A30;
-
+__sinf = 0x80015A30;
+//-- libultra/audio/sl
+alUnlink = 0x80015BF0;
+alLink = 0x80015C20;
+alClose = 0x80015C44;
+alInit = 0x80015C7C;
+//-- libultra/gu/sins
+sins = 0x80015CB0;
+//-- libultra/audio/synsetvol
+alSynSetVol = 0x80015D20;
+//-- libultra/io/sptask
+_VirtualToPhysicalTask = 0x80015DC0;
+osSpTaskLoad = 0x80015EDC;
+osSpTaskStartGo = 0x8001606C;
+//-- libultra/os/destroythread
+osDestroyThread = 0x800160B0;
+//-- libultra/os/exceptasm
+__osExceptionPreamble = 0x800161C0;
 __osEnqueueAndYield = 0x800167DC;
 __osEnqueueThread = 0x800168DC;
 __osPopThread = 0x80016924;
+__osDispatchThread = 0x80016934;
+__osCleanupThread = 0x80016AB0;
+//-- libultra/gu/scale
+guScaleF = 0x80016AC0;
+guScale = 0x80016B14; //difference from 2.0J libultra?
+//-- libultra/libc/bzero
 bzero = 0x80016B60;
-
+//-- libultra/io/piread
+osPiReadIo = 0x80016C00;
+//-- libultra/io/gbpakcheckconnector
+osGbpakCheckConnector = 0x80016C40;
+//-- libultra/io/gbpakpower
+osGbpakPower = 0x800170D0;
+//-- libultra/os/createthread
 osCreateThread = 0x80017240;
+//-- libultra/io/contreaddata
+osContStartReadData = 0x80017390;
+osContGetReadData = 0x80017414;
+__osPackReadData = 0x800174A0;
+//-- libultra/io/siacs
+__osSiCreateAccessQueue = 0x80017570;
+__osSiGetAccess = 0x800175C0;
+__osSiRelAccess = 0x80017604;
+//-- libultra/io/controller
+osContInit = 0x80017630;
+__osContGetInitData = 0x800177A0;
+__osPackRequestData = 0x80017870;
+
+
+osVirtualToPhysical = 0x80017DB0;
 osWritebackDCache = 0x80017E30;
 osInitialize = 0x80017EB0;
 
 createSpeedParam = 0x80018158;
+osGbpakInit = 0x80018520;
+__osSpRawStartDma = 0x80018CA0;
+__osSiRawStartDma = 0x80018D30;
+__osPiRawReadIo = 0x80018EA0;
 
 guMtxF2L = 0x80019000;
 guMtxIdentF = 0x80019100;
 
+alSynNew = 0x8001B6A0;
+__allocParam = 0x8001BB70;
+_timeToSamples = 0x8001BC9C;
+
 osSetEventMesg = 0x8001F9F0;
 
+osGbpakGetStatus = 0x80020A70;
 osEPiStartDma = 0x80020C40;
 osCreateMesgQueue = 0x80020E40;
 osInvalDCache = 0x80020EC0;
 
+__osSpDeviceBusy = 0x80021150;
 osSetThreadPri = 0x800213A0;
 osGetThreadPri = 0x80021480;
 __osEPiRawStartDma = 0x80021650;
@@ -300,9 +355,15 @@ cosf = 0x80022B70;
 osEPiReadIo = 0x80022CE0;
 
 osEPiWriteIo = 0x800236D0;
+__osContRamWrite = 0x800237D0;
+osSetTimer = 0x80023F30;
 
+__osSpSetStatus = 0x80025080;
 osStartThread = 0x80025620;
+alSynDelete = 0x80025D90;
+osGbpakReadWrite = 0x80025DA0;
 
+__osSpSetPc = 0x80026150;
 __osSetHWIntrRoutine = 0x80026190;
 
 
@@ -315,7 +376,16 @@ __osRunQueue = 0x80059348;
 __osActiveQueue = 0x8005934C;
 __osRunningThread = 0x80059350;
 __osFaultedThread = 0x80059354;
-//--
+//-- libultra/audio/sl
+alGlobals = 0x80059360;
+//-- libultra/gu/sins
+sins_data_0000 = 0x80059370;
+sins_data_07FE = 0x80059B6E;
+//-- libultra/os/exceptasm
+__osHwIntTable = 0x80059B70;
+//-- libultra/io/siacs
+__osSiAccessQueueEnabled = 0x80059BA0;
+
 
 //libultra 2.0J .rodata
 //-- libultra/gu/rotate
@@ -326,7 +396,10 @@ sinf_rpi = 0x8005C7D8;
 sinf_pihi = 0x8005C7E0;
 sinf_pilo = 0x8005C7E8;
 sinf_zero = 0x8005C7F0;
-//-- ?
+//-- libultra/os/exceptasm
+__osIntOffTable = 0x8005C800;
+__osIntTable = 0x8005C820;
+
 
 
 //libultra 2.0J .bss
@@ -335,10 +408,26 @@ piAccessBuf = 0x800BADD0;
 __osPiAccessQueue = 0x800BADD8;
 //-- libultra/gu/rotate
 rotate_bss_0000 = 0x800BADF0;
+//-- libultra/io/sptask
+sptask_bss__tmp_task = 0x800BAE00;
+//-- libultra/io/siacs
+siAccessBuf = 0x800BAE40;
+__osSiAccessQueue = 0x800BAE48;
+//-- libultra/io/controller
+__osContPifRam = 0x800BAE60;
+__osContLastCmd = 0x800BAEA0;
+__osMaxControllers = 0x800BAEA1;
+
 
 
 //libultra 2.0J unsorted (but confirmed)
 __OSGlobalIntMask = 0x80059BD0;
+
+__osGbpakTimer = 0x800BAF10;
+__osGbpakTimerQ = 0x800BAF30;
+__osGbpakTimerMsg = 0x800BAF48;
+
+
 
 
 //libmfs .text
@@ -386,41 +475,11 @@ osCapConvertToI8 = 0x80115F50;
 
 
 //TODO
-osViGetCurrentLine = 0x800156B0;
-
-alUnlink = 0x80015BF0;
-alLink = 0x80015C20;
-alClose = 0x80015C44;
-alInit = 0x80015C7C;
-sins = 0x80015CB0;
-alSynSetVol = 0x80015D20;
-sptask_text_0000 = 0x80015DC0;
-osSpTaskLoad = 0x80015EDC;
-osSpTaskStartGo = 0x8001606C;
-osDestroyThread = 0x800160B0;
-__osExceptionPreamble = 0x800161C0;
 
 
-__osDispatchThread = 0x80016934;
-__osCleanupThread = 0x80016AB0;
-
-
-osPiWriteIo = 0x80016C00;
-osGbpakCheckConnector = 0x80016C40;
-osGbpakPower = 0x800170D0;
-
-osContStartReadData = 0x80017390;
-osContGetReadData = 0x80017414;
-contreaddata_text_0110 = 0x800174A0;
-__osSiCreateAccessQueue = 0x80017570;
-__osSiGetAccess = 0x800175C0;
-__osSiRelAccess = 0x80017604;
-osContInit = 0x80017630;
-__osContGetInitData = 0x800177A0;
-__osPackRequestData = 0x80017870;
 _allocatePVoice = 0x80017B80;
 alSynAllocVoice = 0x80017C68;
-osVirtualToPhysical = 0x80017DB0;
+
 
 
 __ull_rem = 0x8001822C;
@@ -433,18 +492,18 @@ __ll_mod = 0x800183F8;
 __ll_rshift = 0x80018494;
 __osSetSR = 0x800184C0;
 __osGetSR = 0x800184D0;
-osGbpakInit = 0x80018520;
+
 __osPfsGetStatus = 0x80018750;
 __osPfsRequestOneChannel = 0x80018820;
 __osPfsGetOneChannelData = 0x800188E4;
 guPerspectiveF = 0x80018980;
 guPerspective = 0x80018BB0;
 alSynStartVoice = 0x80018C10;
-__osSpRawStartDma = 0x80018CA0;
-__osSiRawStartDma = 0x80018D30;
+
+
 osEPiLinkHandle = 0x80018DE0;
 osViBlack = 0x80018E30;
-__osPiRawReadIo = 0x80018EA0;
+
 __osSiRawReadIo = 0x80018EF0;
 osSetIntMask = 0x80018F60;
 
@@ -470,14 +529,14 @@ osScRemoveClient = 0x8001B478;
 osScAddClient = 0x8001B500;
 osCreateScheduler = 0x8001B550;
 osSpTaskYield = 0x8001B680;
-alSynNew = 0x8001B6A0;
+
 alAudioFrame = 0x8001B9A0;
-__allocParam = 0x8001BB70;
+
 __freeParam = 0x8001BBA0;
 _collectPVoices = 0x8001BBB8;
 _freePVoice = 0x8001BC18;
 synthesizer_text_05B0 = 0x8001BC50;
-_timeToSamples = 0x8001BC9C;
+
 synthesizer_text_0624 = 0x8001BCC4;
 init_lpfilter = 0x8001BD20;
 alFxNew = 0x8001BDC0;
@@ -528,7 +587,6 @@ guMtxCatL = 0x8001FD30;
 xprintf_text_0000 = 0x8001FD90;
 _Printf = 0x80020400;
 alFilterNew = 0x80020A50;
-osGbpakGetStatus = 0x80020A70;
 osUnmapTLBAll = 0x80020BF0;
 
 memcpy = 0x80020DA0;
@@ -582,13 +640,13 @@ osAiGetLength = 0x80023680;
 
 osMapTLBRdb = 0x80023720;
 osYieldThread = 0x80023780;
-__osContRamWrite = 0x800237D0;
+
 __osContRamRead = 0x80023A20;
 __osContAddressCrc = 0x80023C50;
 __osContDataCrc = 0x80023D20;
 __osGetCause = 0x80023DC0;
 __osEPiRawWriteIo = 0x80023DD0;
-osSetTimer = 0x80023F30;
+
 xldtob_text_0000 = 0x80024010;
 _Ldtob = 0x80024580;
 lldiv = 0x80024AD0;
@@ -597,7 +655,7 @@ _Litob = 0x80024C60;
 __osSiRawWriteIo = 0x80024F00;
 osDpSetNextBuffer = 0x80024FA0;
 __osDpDeviceBusy = 0x80025050;
-__osSpSetStatus = 0x80025080;
+
 __osSpGetStatus = 0x80025090;
 osCreateViManager = 0x800250C0;
 vimgr_text_0180 = 0x80025240;
@@ -617,12 +675,11 @@ alSynAllocFX = 0x80025B10;
 osContReset = 0x80025BB0;
 __osPackResetData = 0x80025CAC;
 alSynStopVoice = 0x80025D10;
-alSynDelete = 0x80025D90;
-osGbpakReadWrite = 0x80025DA0;
+
 __osGbpakSetBank = 0x80025F60;
 osAiSetNextBuffer = 0x80026030;
 __osAiDeviceBusy = 0x800260E0;
-__osSpSetPc = 0x80026150;
+
 
 MusFxBankSetCurrent = 0x80026400;
 n64dd_createQ = 0x80026E60;
@@ -633,9 +690,8 @@ osClockRate = 0x80053784;
 
 
 
-sins_data_0000 = 0x80059370;
-sins_data_07FE = 0x80059B6E;
-__osHwIntTable = 0x80059B74;
+
+
 __osContinitialized = 0x80059BB0;
 osViClock = 0x80059BC8;
 __osShutdown = 0x80059BCC;
@@ -716,15 +772,13 @@ pimgr_bss_12A0 = 0x800B8780;
 
 
 
-__osContLastCmd = 0x800BAEA0;
-__osMaxControllers = 0x800BAEA1;
+
+
 __osEepromTimerQ = 0x800BAEC8;
 __osEepromTimerMsg = 0x800BAEE0;
 align_bss_0000 = 0x800BAEF0;
 __osFinalrom = 0x800BAF00;
-__osGbpakTimer = 0x800BAF10;
-__osGbpakTimerQ = 0x800BAF30;
-__osGbpakTimerMsg = 0x800BAF48;
+
 vimgr_bss_11B0 = 0x800BB020;
 us2dex2_emu_bss_0000 = 0x800BB100;
 us2dex2_emu_bss_0004 = 0x800BB104;

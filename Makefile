@@ -31,7 +31,7 @@ LD_MAP := $(BUILD_DIR)/$(TARGET).map
 ASM_DIRS := asm asm/data asm/main asm/capture \
 	asm/overlays/printer asm/overlays/saveload asm/overlays/camera \
 	asm/data/main asm/data/capture asm/data/overlays/printer asm/data/overlays/saveload asm/data/overlays/camera \
-	asm/libultra/gu asm/libultra/io asm/libultra/os asm/data/libultra/gu asm/data/libultra/io asm/data/libultra/os \
+	asm/libultra/audio asm/libultra/gu asm/libultra/io asm/libultra/libc asm/libultra/os asm/data/libultra/audio asm/data/libultra/gu asm/data/libultra/io asm/data/libultra/os \
 	asm/leo/lib asm/data/leo/lib
 DATA_DIRS := bin assets
 SRC_DIRS := $(shell test ! -d src || find src -type d)
