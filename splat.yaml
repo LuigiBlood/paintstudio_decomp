@@ -114,9 +114,27 @@ segments:
     - [0x18000, asm, libultra/libc/ll]
     - [0x182C0, asm, libultra/os/setsr]
     - [0x182D0, asm, libultra/os/getsr]
-    - [0x182E0, asm, libultra/io/vigetcurrframebuf]
+    - [0x182E0, asm, libultra/io/vigetnextframebuf]
     - [0x18320, asm, libultra/io/gbpakinit]
-    - [0x18550, asm]
+    - [0x18550, asm, libultra/io/pfsgetstatus]
+    - [0x18780, asm, libultra/gu/perspective]
+    - [0x18A10, asm, libultra/audio/synstartvoice]
+    - [0x18AA0, asm, libultra/io/sprawdma]
+    - [0x18B30, asm, libultra/io/sirawdma]
+    - [0x18BE0, asm, libultra/io/epilinkhandle]
+    - [0x18C30, asm, libultra/io/viblack]
+    - [0x18CA0, asm, libultra/io/pirawread]
+    - [0x18CF0, asm, libultra/io/sirawread]
+    - [0x18D40, asm, libultra/os/getthreadid]
+    - [0x18D60, asm, libultra/os/setintmask]
+    - [0x18E00, asm, libultra/gu/mtxutil]
+    - [0x19070, asm, libultra/io/visetmode]
+    - [0x190E0, asm, libultra/gu/lookat]
+    - [0x19410, asm, libultra/audio/synsetpitch]
+    - [0x194A0, asm, libultra/os/probetlb]
+    - [0x19560, asm, libultra/gu/us2dex2_emu]
+    - [0x1A450, asm, libultra/io/pimgr]
+    - [0x1A5C0, asm]
 
 
     # data
@@ -139,7 +157,10 @@ segments:
     - [0x599A0, data, libultra/io/siacs]
     - [0x599B0, data, libultra/io/controller]
     - [0x599C0, data, libultra/os/initialize]
-    - [0x599E0, data]
+    - [0x599E0, data, libultra/io/vitbl]
+    - [0x5AB60, data, libultra/gu/us2dex2_emu]
+    - [0x5AB90, data, libultra/io/pimgr]
+    - [0x5ABC0, data]
 
     # rodata
     #--libleo .rodata
@@ -156,7 +177,9 @@ segments:
     - [0x5C5B0, rodata, libultra/gu/sinf]
     - [0x5C600, rodata, libultra/os/exceptasm]
     - [0x5C650, rodata, libultra/gu/align]
-    - [0x5C660, rodata]
+    - [0x5C660, rodata, libultra/gu/perspective]
+    - [0x5C670, rodata, libultra/os/setintmask]
+    - [0x5C6F0, rodata]
 
     # DATA - Microcode
     - { start: 0x76380, type: databin, use_src_path: True, name: rsp/f3dex2 }
@@ -189,6 +212,8 @@ segments:
     #- { type: .bss, vram: 0x800BAEF0, name: libultra/gu/align }
     #- { type: .bss, vram: 0x800BAF00, name: libultra/os/initialize }
     #- { type: .bss, vram: 0x800BAF10, name: libultra/io/gbpakinit }
+    #- { type: .bss, vram: 0x800BB100, name: libultra/gu/us2dex2_emu }
+    #- { type: .bss, vram: 0x800BB120, name: libultra/io/pimgr }
 
   - name: main
     type: code
