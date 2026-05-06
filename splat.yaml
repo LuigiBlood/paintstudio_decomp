@@ -134,7 +134,17 @@ segments:
     - [0x194A0, asm, libultra/os/probetlb]
     - [0x19560, asm, libultra/gu/us2dex2_emu]
     - [0x1A450, asm, libultra/io/pimgr]
-    - [0x1A5C0, asm]
+    - [0x1A5C0, asm, libultra/io/devmgr]
+    - [0x1A9D0, asm, libultra/io/pirawdma]
+    - [0x1AAA0, asm, libultra/audio/synsetpan]
+    - [0x1AB40, asm, libultra/sched/sched]
+    - [0x1B480, asm, libultra/io/sptaskyield]
+    - [0x1B4A0, asm, libultra/audio/synthesizer]
+    - [0x1BB20, asm, libultra/audio/drvrnew]
+    - [0x1C2D0, asm, libultra/audio/mainbus]
+    - [0x1C420, asm, libultra/audio/reverb]
+    - [0x1D080, asm, libultra/audio/auxbus]
+    - [0x1D190, asm]
 
 
     # data
@@ -160,7 +170,11 @@ segments:
     - [0x599E0, data, libultra/io/vitbl]
     - [0x5AB60, data, libultra/gu/us2dex2_emu]
     - [0x5AB90, data, libultra/io/pimgr]
-    - [0x5ABC0, data]
+    - [0x5ABC0, data, libultra/sched/sched]
+    - [0x5ABD0, data, libultra/audio/drvrnew]
+    - [0x5AD60, data, libultra/audio/reverb]
+    - [0x5AD80, data]
+
 
     # rodata
     #--libleo .rodata
@@ -179,7 +193,13 @@ segments:
     - [0x5C650, rodata, libultra/gu/align]
     - [0x5C660, rodata, libultra/gu/perspective]
     - [0x5C670, rodata, libultra/os/setintmask]
-    - [0x5C6F0, rodata]
+    - [0x5C6F0, rodata, libultra/io/devmgr]
+    - [0x5C710, rodata, libultra/sched/sched]
+    - [0x5C730, rodata, libultra/audio/synthesizer]
+    - [0x5C740, rodata, libultra/audio/drvrnew]
+    - [0x5C760, rodata, libultra/audio/reverb]
+    - [0x5C790, rodata]
+
 
     # DATA - Microcode
     - { start: 0x76380, type: databin, use_src_path: True, name: rsp/f3dex2 }
