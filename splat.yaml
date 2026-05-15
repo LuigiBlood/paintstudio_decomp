@@ -144,7 +144,22 @@ segments:
     - [0x1C2D0, asm, libultra/audio/mainbus]
     - [0x1C420, asm, libultra/audio/reverb]
     - [0x1D080, asm, libultra/audio/auxbus]
-    - [0x1D190, asm]
+    - [0x1D190, asm, libultra/audio/env]
+    - [0x1DE10, asm, libultra/audio/resample]
+    - [0x1E110, asm, libultra/io/contpfs]
+    - [0x1EC90, hasm, libultra/os/getcount]
+    - [0x1ECA0, asm, libultra/audio/load]
+    - [0x1F7F0, asm, libultra/os/seteventmesg]
+    - [0x1F8B0, hasm, libultra/gu/sqrtf]
+    - [0x1F8C0, asm, libultra/gu/mtxcatf]
+    - [0x1FAD0, asm, libultra/gu/mtxcatl]
+    - [0x1FB90, asm, libultra/libc/xprintf]
+    - [0x20850, asm, libultra/audio/filter]
+    - [0x20870, asm, libultra/io/gbpakgetstatus]
+    - [0x209F0, hasm, libultra/os/unmaptlball]
+    - [0x20A40, asm, libultra/io/epidma]
+    - [0x20B20, asm]
+
 
 
     # data
@@ -173,7 +188,11 @@ segments:
     - [0x5ABC0, data, libultra/sched/sched]
     - [0x5ABD0, data, libultra/audio/drvrnew]
     - [0x5AD60, data, libultra/audio/reverb]
-    - [0x5AD80, data]
+    - [0x5AD80, data, libultra/audio/env]
+    - [0x5AEC0, data, libultra/io/contpfs]
+    - [0x5AED0, data, libultra/os/seteventmesg]
+    - [0x5AEE0, data, libultra/libc/xprintf]
+    - [0x5B000, data]
 
 
     # rodata
@@ -198,7 +217,10 @@ segments:
     - [0x5C730, rodata, libultra/audio/synthesizer]
     - [0x5C740, rodata, libultra/audio/drvrnew]
     - [0x5C760, rodata, libultra/audio/reverb]
-    - [0x5C790, rodata]
+    - [0x5C790, rodata, libultra/audio/env]
+    - [0x5C7F0, rodata, libultra/audio/resample]
+    - [0x5C830, rodata, libultra/libc/xprintf]
+    - [0x5C930, rodata]
 
 
     # DATA - Microcode
@@ -234,6 +256,9 @@ segments:
     #- { type: .bss, vram: 0x800BAF10, name: libultra/io/gbpakinit }
     #- { type: .bss, vram: 0x800BB100, name: libultra/gu/us2dex2_emu }
     #- { type: .bss, vram: 0x800BB120, name: libultra/io/pimgr }
+    #- { type: .bss, vram: 0x800BC3E0, name: libultra/io/contpfs }
+    #- { type: .bss, vram: 0x800BC4E0, name: libultra/os/seteventmesg }
+
 
   - name: main
     type: code

@@ -451,23 +451,56 @@ _doModFunc = 0x8001D1D0;
 //-- libultra/audio/auxbus
 alAuxBusParam = 0x8001D280;
 alAuxBusPull = 0x8001D2B0;
-//--
-
-
+//-- libultra/audio/env
 alEnvmixerPull = 0x8001D390;
 alEnvmixerParam = 0x8001D898;
-
+_pullSubFrame = 0x8001D978;
+_frexpf = 0x8001DC60;
+_ldexpf = 0x8001DD4C;
+_getRate = 0x8001DD74;
+_getVol = 0x8001DF58;
+//-- libultra/audio/resample
 alResampleParam = 0x8001E010;
 alResamplePull = 0x8001E0FC;
+//-- libultra/io/contpfs
+__osSumcalc = 0x8001E310;
+__osIdCheckSum = 0x8001E384;
+__osRepairPackId = 0x8001E480;
+__osCheckPackId = 0x8001E7D0;
+__osGetId = 0x8001E934;
+__osCheckId = 0x8001EAE0;
+__osPfsRWInode = 0x8001EBB4;
+//-- libultra/os/getcount
+osGetCount = 0x8001EE90;
+//-- libultra/audio/load
 alLoadParam = 0x8001EEA0;
-
+alRaw16Pull = 0x8001F074;
+_decodeChunk = 0x8001F420;	//compiled differently
 alAdpcmPull = 0x8001F54C;
+//-- libultra/os/seteventmesg
 osSetEventMesg = 0x8001F9F0;
-
+//-- libultra/gu/sqrtf
+sqrtf = 0x8001FAB0;
+//-- libultra/gu/mtxcatf
+guMtxXFMF = 0x8001FAC0;	//different
+guMtxCatF = 0x8001FB60;
+//-- libultra/gu/mtxcatl
+guMtxXFML = 0x8001FCD0;
+guMtxCatL = 0x8001FD30;
+//-- libultra/libc/xprintf
+_Putfld = 0x8001FD90;
+_Printf = 0x80020400;
+//-- libultra/audio/filter
 alFilterNew = 0x80020A50;
+//-- libultra/io/gbpakgetstatus
 osGbpakGetStatus = 0x80020A70;
+//-- libultra/os/unmaptlball
 osUnmapTLBAll = 0x80020BF0;
+//-- libultra/io/epidma
 osEPiStartDma = 0x80020C40;
+//--0x80020D20
+
+
 osCreateMesgQueue = 0x80020E40;
 osInvalDCache = 0x80020EC0;
 osInvalICache = 0x80020F70;
@@ -476,6 +509,7 @@ alSavePull = 0x80021090;
 alSaveParam = 0x8002111C;
 __osSpDeviceBusy = 0x80021150;
 __osSiDeviceBusy = 0x80021180;
+osJamMesg = 0x80021250;
 osSetThreadPri = 0x800213A0;
 osGetThreadPri = 0x80021480;
 __osEPiRawReadIo = 0x800214A0;
@@ -486,13 +520,16 @@ __osSetGlobalIntMask = 0x80021E60;
 
 guNormalize = 0x80022000;
 bcopy = 0x800220C0;
+alCopy = 0x800223D0;
 __osResetGlobalIntMask = 0x80022450;
 __osDisableInt = 0x80022AB0;
 __osRestoreInt = 0x80022B20;
+osPiGetCmdQueue = 0x80022B40;
 cosf = 0x80022B70;
 osEPiReadIo = 0x80022CE0;
 osViSetEvent = 0x80022EC0;
 
+__osPfsSelectBank = 0x800235E0;
 __osSetFpcCsr = 0x80023670;
 osEPiWriteIo = 0x800236D0;
 osMapTLBRdb = 0x80023720;
@@ -573,7 +610,18 @@ drvrNew_data_0140 = 0x8005AF10;
 drvrNew_data_0168 = 0x8005AF38;
 //-- libultra/audio/reverb
 reverb_data_0000 = 0x8005AF60;
-
+//-- libultra/audio/env
+env_data_0000 = 0x8005AF80;
+env_data_0100 = 0x8005B080;
+//-- libultra/io/contpfs
+__osPfsInodeCacheChannel = 0x8005B0C0;
+__osPfsInodeCacheBank = 0x8005B0C4;
+//-- libultra/os/seteventmesg
+__osPreNMI = 0x8005B0D0;
+//-- libultra/libc/xprintf
+xprintf_data_0000 = 0x8005B0E0;
+xprintf_data_0024 = 0x8005B104;
+//--0x8005B200
 
 
 //libultra 2.0J .rodata
@@ -606,6 +654,20 @@ drvrNew_rodata_0018 = 0x8005C958;
 //-- libultra/audio/reverb
 reverb_rodata_0000 = 0x8005C960;
 reverb_rodata_0020 = 0x8005C980;
+//-- libultra/audio/env
+env_rodata_0000 = 0x8005C990;		//jmp table
+env_rodata_0048 = 0x8005C9D8;
+env_rodata_0050 = 0x8005C9E0;
+//-- libultra/audio/resample
+resample_rodata_0000 = 0x8005C9F0;	//jmp table
+resample_rodata_0028 = 0x8005CA18;
+resample_rodata_0030 = 0x8005CA20;
+//-- libultra/libc/xprintf
+xprintf_rodata_0000 = 0x8005CA30;
+xprintf_rodata_0004 = 0x8005CA34;
+xprintf_rodata_000C = 0x8005CA3C;
+xprintf_rodata_0024 = 0x8005CA54;	//jmp table
+//--0x8005CB30
 
 
 //libultra 2.0J .bss
@@ -650,17 +712,23 @@ piThread = 0x800BB210;
 piThreadStack = 0x800BB3C0;
 piEventQueue = 0x800BC3C0;
 piEventBuf = 0x800BC3D8;
+//-- libultra/io/contpfs
+__osPfsInodeCache = 0x800BC3E0;
+//-- libultra/os/seteventmesg
+__osEventStateTab = 0x800BC4E0;
 
 
 //libultra 2.0J unsorted (but confirmed)
-__osPfsInodeCacheBank = 0x8005B0C4;
 
 vi_data_0000 = 0x8005B140;
 __osViCurr = 0x8005B1A0;
 __osViNext = 0x8005B1A4;
 
 
+
+
 __osPfsPifRam = 0x800BC5A0;
+
 
 
 //libmfs .text
@@ -713,45 +781,6 @@ osCapConvertToI8 = 0x80115F50;
 //------------------------------------------------------------------------
 
 
-
-
-
-
-
-
-
-
-
-
-env_text_05E8 = 0x8001D978;
-_frexpf = 0x8001DC60;
-_ldexpf = 0x8001DD4C;
-env_text_0BC8 = 0x8001DF58;
-
-
-__osSumcalc = 0x8001E310;
-__osIdCheckSum = 0x8001E384;
-__osRepairPackId = 0x8001E480;
-__osCheckPackId = 0x8001E7D0;
-__osGetId = 0x8001E934;
-__osCheckId = 0x8001EAE0;
-__osPfsRWInode = 0x8001EBB4;
-osGetCount = 0x8001EE90;
-
-alRaw16Pull = 0x8001F074;
-load_text_0580 = 0x8001F420;
-
-
-sqrtf = 0x8001FAB0;
-guMtxXFMF = 0x8001FAC0;
-guMtxCatF = 0x8001FB60;
-guMtxXFML = 0x8001FCD0;
-guMtxCatL = 0x8001FD30;
-xprintf_text_0000 = 0x8001FD90;
-_Printf = 0x80020400;
-
-
-
 memcpy = 0x80020DA0;
 strlen = 0x80020DCC;
 strchr = 0x80020DF4;
@@ -764,7 +793,7 @@ alSynSetFXMix = 0x80020FF0;
 
 guTranslateF = 0x800211B0;
 guTranslate = 0x800211F8;
-osJamMesg = 0x80021250;
+
 
 
 
@@ -779,13 +808,13 @@ __osInsertTimer = 0x80021CD8;
 
 __osSetCompare = 0x80022090;
 
-alCopy = 0x800223D0;
+
 
 guFrustumF = 0x800224B0;
 guFrustum = 0x80022604;
 __osViInit = 0x80022670;
 __osViSwapContext = 0x800227B0;
-osPiGetCmdQueue = 0x80022B40;
+
 MusPtrBankGetCurrent = 0x80022B58;
 
 
@@ -797,7 +826,7 @@ __osPfsRequestData = 0x800230D0;
 __osPfsGetInitData = 0x800231A0;
 alSynAddPlayer = 0x80023270;
 osCartRomInit = 0x80023480;
-__osPfsSelectBank = 0x800235E0;
+
 
 osAiGetLength = 0x80023680;
 
@@ -854,13 +883,7 @@ n64dd_createQ = 0x80026E60;
 player_bss_003C = 0x8005AD98;
 
 
-env_data_0000 = 0x8005AF80;
-env_data_0100 = 0x8005B080;
-__osPfsInodeCacheChannel = 0x8005B0C0;
 
-__osPreNMI = 0x8005B0D0;
-xprintf_data_0000 = 0x8005B0E0;
-xprintf_data_0024 = 0x8005B104;
 __osTimerList = 0x8005B130;
 
 osViModePalLan1 = 0x8005B1B0;
@@ -878,14 +901,6 @@ aisetnextbuf_data_0000 = 0x8005B360;
 
 
 
-
-
-env_rodata_0000 = 0x8005C990;
-resample_rodata_0028 = 0x8005CA18;
-resample_rodata_0030 = 0x8005CA20;
-xprintf_rodata_0000 = 0x8005CA30;
-xprintf_rodata_0004 = 0x8005CA34;
-xprintf_rodata_000C = 0x8005CA3C;
 xldtob_rodata_0000 = 0x8005CB90;
 xldtob_rodata_0048 = 0x8005CBD8;
 xldtob_rodata_004C = 0x8005CBDC;
@@ -902,9 +917,6 @@ vimgr_bss_11B0 = 0x800BB020;
 
 
 
-
-__osPfsInodeCache = 0x800BC3E0;
-__osEventStateTab = 0x800BC4E0;
 __osBaseCounter = 0x800BC588;
 __osTimerCounter = 0x800BC590;
 __CartRomHandle = 0x800BC5F4;
