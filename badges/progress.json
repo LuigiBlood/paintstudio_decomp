@@ -1,14 +1,14 @@
 {
   "total": {
-    "decompiled_ratio": 4.369298083394872e-05,
-    "decompiled_bytes": 2512,
+    "decompiled_ratio": 0.00011806845298600475,
+    "decompiled_bytes": 6788,
     "total_bytes": 57492072
   },
   "code": {
-    "decompiled_ratio": 0.0016797764605171774,
-    "decompiled_funcs_ratio": 0.003683241252302026,
-    "decompiled_funcs": 10,
-    "decompiled_bytes": 2496,
+    "decompiled_ratio": 0.004557470428935226,
+    "decompiled_funcs_ratio": 0.008103130755064457,
+    "decompiled_funcs": 22,
+    "decompiled_bytes": 6772,
     "total_funcs": 2715,
     "total_bytes": 1485912
   },
@@ -18,8 +18,8 @@
     "total_bytes": 56006160
   },
   "git": {
-    "commit_hash": "c12c48e10b3ced75050f1431810d15f7c1118c6b",
-    "commit_hash_short": "c12c48e",
-    "commit_timestamp": 1778861582
+    "commit_hash": "2e76dce4ddf76e5c7aecbb139bdb5cc6ca76a76f",
+    "commit_hash_short": "2e76dce",
+    "commit_timestamp": 1779319532
   }
 }
